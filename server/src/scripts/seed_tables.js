@@ -3,6 +3,15 @@ const bcrypt = require('bcryptjs');
 
 // clean tables func
 async function clearData() {
+  console.log('🗑 Clearing tables...');
+
+  
+  await pool.query('DELETE FROM order_items');
+  await pool.query('ALTER TABLE order_items AUTO_INCREMENT = 1');
+
+  await pool.query('DELETE FROM orders');
+  await pool.query('ALTER TABLE orders AUTO_INCREMENT = 1');
+
   await pool.query('DELETE FROM dishes');
   await pool.query('ALTER TABLE dishes AUTO_INCREMENT = 1');
 
@@ -11,6 +20,8 @@ async function clearData() {
 
   await pool.query('DELETE FROM users');
   await pool.query('ALTER TABLE users AUTO_INCREMENT = 1');
+
+  console.log('tables cleared and AUTO_INCREMENT reset');
 }
 
 // add users data func
@@ -125,6 +136,36 @@ async function seedDishes() {
   console.log('Dishes added');
 }
 
+// add orders data func
+async function seedOrders() {
+  try {
+    // נכניס הזמנה חדשה ל-user_id = 1
+    const [orderResult] = await pool.query(
+      `INSERT INTO orders (user_id, status, total_price)
+       VALUES (?, ?, ?)`,
+      [1, 'pending', 122.00]  // סה"כ 2×Pizza + 1×Cola
+    );
+
+    
+    const orderId = orderResult.insertId;
+
+    // add orderItems
+    await pool.query(
+      `INSERT INTO order_items (order_id, dish_id, quantity, price)
+       VALUES (?, ?, ?, ?), (?, ?, ?, ?)`,
+      [
+        orderId, 4, 2, 55.00,   // Family Pizza (dish_id = 4, כמות 2)
+        orderId, 13, 1, 12.00   // Cola (dish_id = 13, כמות 1)
+      ]
+    );
+
+    console.log(` order #${orderId} added`);
+  } catch (err) {
+    console.error('Error adding order', err);
+  }
+}
+
+
 // main add data func
 async function seed() {
   try {
@@ -132,6 +173,7 @@ async function seed() {
     await seedUsers();
     await seedCategories();
     await seedDishes();
+    await seedOrders();
     console.log('Seeding finished successfully');
   } catch (err) {
     console.error('Error - in main seeding function:', err);
