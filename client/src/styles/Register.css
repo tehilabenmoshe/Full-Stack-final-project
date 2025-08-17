@@ -1,0 +1,136 @@
+.page-container{
+  padding:0;
+}
+.register-page {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Urbanist', sans-serif;
+}
+
+.register-left {
+  flex: 1.75;
+  background: linear-gradient(to right, #f9e8c6,  #ffe3dc); 
+  padding-top: 80px;
+  padding-bottom: 80px;
+  padding-left: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width:fit-content;
+  
+  
+}
+
+.register-left h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #ffffff;
+  align-items: center;
+  margin-left: 140px;
+}
+
+.register-left p {
+  font-size: 20px;
+  color: #2e2e2e;
+  max-width: 500px;
+}
+
+.register-right {
+  flex: 1;
+  background-color: white;
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-right h2 {
+  font-size: 32px;
+  color: #0c003e;
+  margin-bottom: 20px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+}
+
+.register-form input {
+  margin-bottom: 15px;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.register-form input:focus {
+  border-color: #5a9ff7;
+}
+
+.register-form button {
+  background: linear-gradient(to right, #ff3463,  #ffb443); 
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.register-form button:hover {
+  opacity: 0.85;
+}
+
+.login-link {
+  margin-top: 10px;
+  text-align: center;
+  color: #444;
+}
+
+.login-link a {
+  color: #5a9ff7;
+  text-decoration: none;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+
+.picture {
+  display: flex;
+  align-items: center;
+  gap: 0px; /* רווח קטן בין הטקסט לתמונה */
+  margin-bottom: 10px;
+  margin-left: 100px;
+
+}
+
+.picture img {
+  width: 400px;   /* גודל רוחב */
+  height: 400px;  /* גובה */
+  object-fit: contain; /* שהתמונה לא תתעוות */
+}
+
+.logo2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+  margin-left: 120px;
+}
+
+.logo2 img {
+  width: 350px;
+  height: 80px;  /* גובה */
+  object-fit: contain; /* שהתמונה לא תתעוות */
+
+}
