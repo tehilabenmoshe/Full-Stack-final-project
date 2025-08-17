@@ -1,16 +1,31 @@
 import { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
+import Sidebar from '../components/Sidebar'
+import Topbar from '../components/Topbar'
+import '../styles/customer.css'
 
 
 function Customer(){
-
+    const [q, setQ] = useState('')
 
     return (
-       <div>
-        <h1> Welcome!</h1>
-        <p>התחילי להזמין מהתפריט</p>
-        <Link to="/menu">למעבר לתפריט</Link>
-       </div>
+        <div> 
+          
+            <div className="layout">
+       
+                <Sidebar />
+                <div className="main">
+                    <Topbar query={q} onChange={setQ} />
+                    
+                </div>
+            </div>
+
+        </div>
+
+
+     
+       
+       
     );
 }
 
