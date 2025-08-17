@@ -17,30 +17,32 @@ async function clearData() {
 async function seedUsers() {
   try {
     const sampleUsers = [
-      { name: 'דנה כהן', email: 'dana.cohen@example.com', phone: '052-1234567' },
-      { name: 'איתי לוי', email: 'itai.levi@example.com', phone: '050-7654321' },
-      { name: 'נועה רוזן', email: 'noa.rozen@example.com', phone: '054-9876543' },
-      { name: 'אדם ברק', email: 'adam.barak@example.com', phone: '058-2223344' },
-      { name: 'לירון פרץ', email: 'liron.peretz@example.com', phone: '053-8765432' },
-      { name: 'מיכל כהן', email: 'michal.cohen@example.com', phone: '052-3344556' },
-      { name: 'רועי ישראלי', email: 'roi.israeli@example.com', phone: '050-1122334' },
-      { name: 'סיון כהן', email: 'sivan.cohen@example.com', phone: '054-6677889' },
-      { name: 'דוד לוי', email: 'david.levi@example.com', phone: '053-4455667' },
-      { name: 'עדי בר', email: 'adi.bar@example.com', phone: '052-9988776' },
-      { name: 'שיר כהן', email: 'shir.cohen@example.com', phone: '050-5566778' },
-      { name: 'טל רוזן', email: 'tal.rozen@example.com', phone: '054-7788991' },
-      { name: 'יואב פרץ', email: 'yoav.peretz@example.com', phone: '058-3344557' },
-      { name: 'מאיה לוי', email: 'maya.levi@example.com', phone: '053-2233445' },
-      { name: 'עמית ישראלי', email: 'amit.israeli@example.com', phone: '052-6677885' },
-      { name: 'אלון ברק', email: 'alon.barak@example.com', phone: '050-8899776' },
-      { name: 'קרן כהן', email: 'keren.cohen@example.com', phone: '054-4455669' },
-      { name: 'גיא לוי', email: 'guy.levi@example.com', phone: '053-5566772' },
-      { name: 'הדר ישראלי', email: 'hadar.israeli@example.com', phone: '052-3344552' },
-      { name: 'ליאור בר', email: 'lior.bar@example.com', phone: '050-6677883' }
+      { name: 'Tehila Michaeli', email: 't.micha@example.com', phone: '052-1234567' },
+      { name: 'Miryam Amar', email: 'm.amar@example.com', phone: '052-1234567' },
+      { name: 'John Smith', email: 'john.smith@example.com', phone: '052-1234567' },
+      { name: 'Emily Johnson', email: 'emily.johnson@example.com', phone: '050-7654321' },
+      { name: 'Michael Brown', email: 'michael.brown@example.com', phone: '054-9876543' },
+      { name: 'Sarah Davis', email: 'sarah.davis@example.com', phone: '058-2223344' },
+      { name: 'David Miller', email: 'david.miller@example.com', phone: '053-8765432' },
+      { name: 'Jessica Wilson', email: 'jessica.wilson@example.com', phone: '052-3344556' },
+      { name: 'Daniel Anderson', email: 'daniel.anderson@example.com', phone: '050-1122334' },
+      { name: 'Sophia Martinez', email: 'sophia.martinez@example.com', phone: '054-6677889' },
+      { name: 'James Taylor', email: 'james.taylor@example.com', phone: '053-4455667' },
+      { name: 'Olivia Thomas', email: 'olivia.thomas@example.com', phone: '052-9988776' },
+      { name: 'William Lee', email: 'william.lee@example.com', phone: '050-5566778' },
+      { name: 'Ava Harris', email: 'ava.harris@example.com', phone: '054-7788991' },
+      { name: 'Benjamin Clark', email: 'benjamin.clark@example.com', phone: '058-3344557' },
+      { name: 'Mia Lewis', email: 'mia.lewis@example.com', phone: '053-2233445' },
+      { name: 'Ethan Walker', email: 'ethan.walker@example.com', phone: '052-6677885' },
+      { name: 'Amelia Hall', email: 'amelia.hall@example.com', phone: '050-8899776' },
+      { name: 'Alexander Allen', email: 'alexander.allen@example.com', phone: '054-4455669' },
+      { name: 'Charlotte Young', email: 'charlotte.young@example.com', phone: '053-5566772' },
+      { name: 'Henry King', email: 'henry.king@example.com', phone: '052-3344552' },
+      { name: 'Ella Scott', email: 'ella.scott@example.com', phone: '050-6677883' }
     ];
 
     for (const user of sampleUsers) {
-      const password_hash = await bcrypt.hash('Password123', 10); // סיסמה אחידה לכולם
+      const password_hash = await bcrypt.hash('Password123', 10); // same password for all
       await pool.query(
         `INSERT INTO users (name, email, password_hash, phone, role, created_at)
          VALUES (?, ?, ?, ?, ?, NOW())`,
@@ -48,21 +50,20 @@ async function seedUsers() {
       );
     }
 
-    console.log('Users added ');
+    console.log('Users added');
   } catch (err) {
-    console.error(' Error adding users', err);
+    console.error('Error - adding users', err);
   }
 }
 
-//add categories data func
+// add categories data func
 async function seedCategories() {
   const categories = [
-    { name: 'עיקריות', description: 'מנות עיקריות חמות וטריות' },
-    { name: 'נשנושים', description: 'חטיפים ומנות קטנות' },
-    { name: 'מתוקים', description: 'קינוחים, עוגות ומאפים' },
-    { name: 'סלטים', description: 'סלטים מירקות טריים' },
-    { name: 'שתיה קרה', description: 'משקאות מרעננים' }
-
+    { name: 'Mains', description: 'Hot and fresh main dishes' },
+    { name: 'Snacks', description: 'Small bites and appetizers' },
+    { name: 'Desserts', description: 'Cakes, sweets and pastries' },
+    { name: 'Salads', description: 'Fresh and healthy salads' },
+    { name: 'Drinks', description: 'Refreshing cold drinks' }
   ];
 
   for (const c of categories) {
@@ -71,13 +72,11 @@ async function seedCategories() {
       [c.name, c.description]
     );
   }
-  console.log(' Categories added');
+  console.log('Categories added');
 }
 
-
-//add dishes data func
+// add dishes data func
 async function seedDishes() {
-  // pull categories id from DB
   const [categories] = await pool.query(`SELECT id, name FROM categories`);
   const categoryMap = {};
   for (const c of categories) {
@@ -85,35 +84,35 @@ async function seedDishes() {
   }
 
   const dishes = [
-    // עיקריות
-    { name: 'שווארמה בפיתה', description: 'שווארמה טרייה עם טחינה וסלטים', price: 38, category: 'עיקריות' },
-    { name: 'חזה עוף בגריל', description: 'חזה עוף עסיסי על האש', price: 42, category: 'עיקריות' },
-    { name: 'פסטה ברוטב עגבניות', description: 'פסטה איטלקית עם רוטב עגבניות עשיר', price: 36, category: 'עיקריות' },
-    { name: 'פיצה משפחתית', description: 'פיצה בגודל משפחתי עם גבינה וזיתים', price: 55, category: 'עיקריות' },
+    // Mains
+    { name: 'Shawarma in Pita', description: 'Fresh shawarma with tahini and salad', price: 38, category: 'Mains' },
+    { name: 'Grilled Chicken Breast', description: 'Juicy grilled chicken breast', price: 42, category: 'Mains' },
+    { name: 'Pasta with Tomato Sauce', description: 'Italian pasta with rich tomato sauce', price: 36, category: 'Mains' },
+    { name: 'Family Pizza', description: 'Large pizza with cheese and olives', price: 55, category: 'Mains' },
 
-    // נשנושים
-    { name: 'צ’יפס קלאסי', description: 'צ’יפס פריך עם מלח גס', price: 18, category: 'נשנושים' },
-    { name: 'טבעות בצל', description: 'טבעות בצל מצופות פריכות', price: 20, category: 'נשנושים' },
-    { name: 'לחמניות שום', description: 'לחמניות אפויות בחמאת שום', price: 22, category: 'נשנושים' },
-    { name: 'נאצ’וס עם סלסה', description: 'נאצ’וס חריף עם רוטב סלסה', price: 25, category: 'נשנושים' },
+    // Snacks
+    { name: 'Classic Fries', description: 'Crispy fries with sea salt', price: 18, category: 'Snacks' },
+    { name: 'Onion Rings', description: 'Crispy battered onion rings', price: 20, category: 'Snacks' },
+    { name: 'Garlic Bread', description: 'Baked bread with garlic butter', price: 22, category: 'Snacks' },
+    { name: 'Nachos with Salsa', description: 'Spicy nachos with salsa dip', price: 25, category: 'Snacks' },
 
-    // מתוקים
-    { name: 'סופלה שוקולד', description: 'עוגת שוקולד חמה עם גלידה', price: 28, category: 'מתוקים' },
-    { name: 'עוגת גבינה קרה', description: 'עוגה קרה עם ביסקוויטים וגבינה', price: 30, category: 'מתוקים' },
-    { name: 'גלידת וניל', description: 'כדור גלידת וניל קלאסית', price: 18, category: 'מתוקים' },
-    { name: 'כנאפה', description: 'קינוח מזרחי עם גבינה מתוקה', price: 32, category: 'מתוקים' },
+    // Desserts
+    { name: 'Chocolate Souffle', description: 'Warm chocolate cake with ice cream', price: 28, category: 'Desserts' },
+    { name: 'Cheesecake', description: 'Cold cheesecake with biscuit base', price: 30, category: 'Desserts' },
+    { name: 'Vanilla Ice Cream', description: 'Classic scoop of vanilla ice cream', price: 18, category: 'Desserts' },
+    { name: 'Knafeh', description: 'Middle Eastern dessert with sweet cheese', price: 32, category: 'Desserts' },
 
-    // שתיה קרה
-    { name: 'קולה', description: 'בקבוק אישי 330 מ"ל', price: 12, category: 'שתיה קרה' },
-    { name: 'מים מינרליים', description: 'בקבוק אישי 500 מ"ל', price: 8, category: 'שתיה קרה' },
-    { name: 'מיץ תפוזים טבעי', description: 'כוס מיץ סחוט טרי', price: 15, category: 'שתיה קרה' },
-    { name: 'לימונדה ', description: 'כוס לימונדה צוננת', price: 14, category: 'שתיה קרה' },
+    // Drinks
+    { name: 'Cola', description: '330ml cola bottle', price: 12, category: 'Drinks' },
+    { name: 'Mineral Water', description: '500ml mineral water bottle', price: 8, category: 'Drinks' },
+    { name: 'Fresh Orange Juice', description: 'Freshly squeezed orange juice', price: 15, category: 'Drinks' },
+    { name: 'Lemonade', description: 'Cold refreshing lemonade', price: 14, category: 'Drinks' },
 
-    // סלטים
-    { name: 'סלט יווני', description: 'סלט עם פטה, זיתים וירקות', price: 32, category: 'סלטים' },
-    { name: 'סלט קיסר', description: 'חסה, קרוטונים ופרמזן עם רוטב קיסר', price: 35, category: 'סלטים' },
-    { name: 'סלט קינואה וירקות', description: 'קינואה, עגבניות, מלפפונים ועשבי תיבול', price: 34, category: 'סלטים' },
-    { name: 'סלט ישראלי קצוץ', description: 'מלפפון, עגבניה, פלפל ובצל קצוצים דק', price: 28, category: 'סלטים' }
+    // Salads
+    { name: 'Greek Salad', description: 'Salad with feta, olives and vegetables', price: 32, category: 'Salads' },
+    { name: 'Caesar Salad', description: 'Lettuce, croutons and parmesan with Caesar dressing', price: 35, category: 'Salads' },
+    { name: 'Quinoa Salad', description: 'Quinoa with fresh vegetables and herbs', price: 34, category: 'Salads' },
+    { name: 'Chopped Vegetable Salad', description: 'Finely chopped cucumber, tomato, pepper and onion', price: 28, category: 'Salads' }
   ];
 
   for (const d of dishes) {
@@ -123,9 +122,8 @@ async function seedDishes() {
     );
   }
 
-  console.log(' Dishes added');
+  console.log('Dishes added');
 }
-
 
 // main add data func
 async function seed() {
@@ -134,9 +132,9 @@ async function seed() {
     await seedUsers();
     await seedCategories();
     await seedDishes();
-    console.log(' main func finished');
+    console.log('Seeding finished successfully');
   } catch (err) {
-    console.error('Error in main func :', err);
+    console.error('Error - in main seeding function:', err);
   } finally {
     await pool.end();
   }
