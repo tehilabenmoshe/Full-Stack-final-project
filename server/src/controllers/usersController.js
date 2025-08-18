@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const UserModel = require('../models/UserModel'); // ודאי שהנתיב נכון
+const UserModel = require('../models/userModel'); // ודאי שהנתיב נכון
 
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-me';
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
@@ -46,18 +46,18 @@ exports.register = async (req, res) => {
 /** POST /api/users/login */
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body || {};
-    if (!email || !password) {
-      return res.status(400).json({ error: 'email and password are required' });
+    const { username, password } = req.body || {};
+    if (!username || !password) {
+      return res.status(400).json({ error: 'username and password are required' });
     }
 
-    const user = await UserModel.findByEmail(email);
+    const user = await UserModel.findByUsername(username);
     if (!user) return res.status(401).json({ error: 'Invalid credentials' });
 
     const ok = await bcrypt.compare(password, user.password_hash);
     if (!ok) return res.status(401).json({ error: 'Invalid credentials' });
 
-    const token = signToken({ id: user.id, email: user.email });
+    const token = signToken({ id: user.id, username: user.username });
     return res.json({ user: safeUser(user), token });
   } catch (err) {
     console.error('login error:', err);
@@ -72,7 +72,7 @@ exports.requireAuth = (req, res, next) => {
     const token = h.startsWith('Bearer ') ? h.slice(7) : null;
     if (!token) return res.status(401).json({ error: 'Missing Authorization header' });
     const payload = jwt.verify(token, JWT_SECRET);
-    req.user = payload; // { id, email, iat, exp }
+    req.user = payload; // { id, username , iat, exp }
     next();
   } catch {
     return res.status(401).json({ error: 'Invalid or expired token' });

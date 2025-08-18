@@ -20,6 +20,14 @@ const UserModel = {
     return rows[0] || null;
   },
 
+  async findByUsername(username) {
+    const [rows] = await pool.query(
+      'SELECT * FROM users WHERE name = ?',
+      [username]
+    );
+    return rows[0] || null;
+  },
+
   // מציאת משתמש לפי ID
   async findById(id) {
     const [rows] = await pool.query(
