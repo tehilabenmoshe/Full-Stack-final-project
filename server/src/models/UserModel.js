@@ -20,10 +20,10 @@ const UserModel = {
     return rows[0] || null;
   },
 
-  async findByUsername(username) {
+  async findByUsername(name) {
     const [rows] = await pool.query(
       'SELECT * FROM users WHERE name = ?',
-      [username]
+      [name]
     );
     return rows[0] || null;
   },

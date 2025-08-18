@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Register.css';
 import burger from "../assets/burger.png";
 import logo from "../assets/logo.png";
+import { useAuth } from '../AuthProvider'; // ודאי שהנתיב נכון
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -10,6 +11,7 @@ export default function Login() {
   const [error, setError]       = useState('');
   const [loading, setLoading]   = useState(false);
   const nav = useNavigate();
+  const { login } = useAuth();
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -22,25 +24,25 @@ export default function Login() {
 
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3000/api/users/login', {
+      const API = import.meta.env.VITE_API_BASE || 'http://localhost:3000';
+      const res = await fetch(`${API}/api/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username, password }),
       });
 
+      const data = await res.json().catch(() => ({})); // הגנה אם אין גוף
       if (!res.ok) {
-        let msg = 'Login failed';
-        try { const j = await res.json(); if (j?.error) msg = j.error; } catch {}
-        throw new Error(msg);
+        throw new Error(data?.error || 'Login failed');
       }
 
-      const data = await res.json(); // { user, token }
-      if (data?.token) localStorage.setItem('token', data.token);
-      if (data?.user)  localStorage.setItem('user', JSON.stringify(data.user));
+      // עדכון גלובלי דרך ה-Context (login שומר token+user מקומית)
+      login({ user: data.user, token: data.token });
 
+      // איפוס וניווט
       setUsername('');
       setPassword('');
-      nav('/customer', { replace: true }); // ניווט לעמוד הלקוח
+      nav('/customer', { replace: true });
     } catch (err) {
       setError(err.message || 'Login failed');
     } finally {
