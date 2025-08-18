@@ -44,7 +44,7 @@ function Login({ setUser }) {
          <div className="picture">
             <img src={burger} alt="burger" />    
           </div>
-        <h1> Welcome Back</h1>
+       
       
       </div>
       <div className="register-right">

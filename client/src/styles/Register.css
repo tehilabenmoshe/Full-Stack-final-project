@@ -116,8 +116,8 @@
 }
 
 .picture img {
-  width: 400px;   /* גודל רוחב */
-  height: 400px;  /* גובה */
+  width: 450px;   /* גודל רוחב */
+  height: 450px;  /* גובה */
   object-fit: contain; /* שהתמונה לא תתעוות */
 }
 
@@ -125,7 +125,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 50px;
-  margin-left: 120px;
+  margin-left: 150px;
 }
 
 .logo2 img {

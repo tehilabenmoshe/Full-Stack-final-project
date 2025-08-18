@@ -9,12 +9,10 @@ import Customer from './pages/Customer'
 export default function App(){
   return (
     <>
-      <nav style={{padding:12, borderBottom:'1px solid #eee'}}>
-         <Link to="/Login">Login</Link> 
-      </nav>
+     
       <main>
         <Routes>
-          <Route path="/" element={<Customer/>} />
+          <Route path="/" element={<Login/>} />
           <Route path="/customer" element={<Customer/>} />
           <Route path="/Home" element={<Home/>} />
           <Route path="/Login" element={<Login/>} />
