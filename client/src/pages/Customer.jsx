@@ -11,26 +11,18 @@ function Customer(){
     const { user } = useAuth();
 
     return (
-        <div> 
-          
+        <div>           
             <div className="layout">
-       
                 <Sidebar />
                 <div className="main">
                     <Topbar query={q} onChange={setQ} />
                    
                      <h1>Welcome, {user?.name}!</h1>
-                     
-                    
+                                         
                 </div>
             </div>
-
         </div>
-
-
-     
-       
-       
+  
     );
 }
 
