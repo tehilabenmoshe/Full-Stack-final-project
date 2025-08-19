@@ -23,11 +23,13 @@ async function createCategoriesTable() {
       id INT AUTO_INCREMENT PRIMARY KEY,
       name VARCHAR(100) NOT NULL UNIQUE,
       description TEXT,
+      image_url VARCHAR(255),             -- ✅ הוספנו עמודה לתמונה
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB;
   `);
   console.log('Categories table created');
 }
+
 
 
  //create dishes table
@@ -92,6 +94,15 @@ async function createOrderItemsTable() {
 //  main function to build tables
 async function createTables() {
   try {
+
+await pool.query('DROP TABLE IF EXISTS order_items');
+    await pool.query('DROP TABLE IF EXISTS orders');
+    await pool.query('DROP TABLE IF EXISTS dishes');
+    await pool.query('DROP TABLE IF EXISTS categories');
+
+
+    console.log('✅ All tables dropped');
+
     await createUsersTable();
     await createCategoriesTable();
     await createDishesTable();

@@ -70,21 +70,43 @@ async function seedUsers() {
 // add categories data func
 async function seedCategories() {
   const categories = [
-    { name: 'Mains', description: 'Hot and fresh main dishes' },
-    { name: 'Snacks', description: 'Small bites and appetizers' },
-    { name: 'Desserts', description: 'Cakes, sweets and pastries' },
-    { name: 'Salads', description: 'Fresh and healthy salads' },
-    { name: 'Drinks', description: 'Refreshing cold drinks' }
+    { 
+      name: 'Mains', 
+      description: 'Hot and fresh main dishes',
+      image_url: '/photos/categoriesPhotos/mains.png'
+    },
+    { 
+      name: 'Snacks', 
+      description: 'Small bites and appetizers',
+      image_url: '/photos/categoriesPhotos/snacks.png'
+    },
+    { 
+      name: 'Desserts', 
+      description: 'Cakes, sweets and pastries',
+      image_url: '/photos/categoriesPhotos/desserts.png'
+    },
+    { 
+      name: 'Salads', 
+      description: 'Fresh and healthy salads',
+      image_url: '/photos/categoriesPhotos/salads.png'
+    },
+    { 
+      name: 'Drinks', 
+      description: 'Refreshing cold drinks',
+      image_url: '/photos/categoriesPhotos/drinks.png'
+    }
   ];
 
   for (const c of categories) {
     await pool.query(
-      `INSERT INTO categories (name, description) VALUES (?, ?)`,
-      [c.name, c.description]
+      `INSERT INTO categories (name, description, image_url) VALUES (?, ?, ?)`,
+      [c.name, c.description, c.image_url]
     );
   }
-  console.log('Categories added');
+  console.log('Categories with images added');
 }
+
+
 
 // add dishes data func
 async function seedDishes() {

@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar'
 import Topbar from '../components/Topbar'
+import CategoryList from '../components/CategoryList';
 import '../styles/customer.css'
 import { useAuth } from '../AuthProvider';
+
 
 
 function Customer(){
@@ -18,7 +20,8 @@ function Customer(){
                     <Topbar query={q} onChange={setQ} />
                    
                      <h1>Welcome, {user?.name}!</h1>
-                                         
+
+                    <CategoryList />                   
                 </div>
             </div>
         </div>
