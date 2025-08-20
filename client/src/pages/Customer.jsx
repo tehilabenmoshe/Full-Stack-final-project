@@ -18,8 +18,6 @@ function Customer(){
                 <Sidebar />
                 <div className="main">
                     <Topbar query={q} onChange={setQ} />
-                   
-                     <h1>Welcome, {user?.name}!</h1>
 
                     <CategoryList />                   
                 </div>

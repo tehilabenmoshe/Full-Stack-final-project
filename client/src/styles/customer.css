@@ -3,6 +3,7 @@
     --card:#fff;
     --line:#eaeaea;
     --brand:#ff4d4f; 
+    font-family: 'Urbanist', sans-serif;
 }
 
 
@@ -20,9 +21,11 @@ body{
 }
 
 .side{
-    background:#fff; 
+    background:#f4f3f3; 
     border-inline-end:1px solid var(--line);
     padding: 30px;
+    border: none;
+    font-family: 'Urbanist', sans-serif;
 
   
 }
@@ -43,36 +46,15 @@ body{
 .snav a{padding:8px 10px; border-radius:8px; text-decoration:none; color:#111}
 .snav a.active{background:var(--brand); color:#fff}
 
-.main{display:flex; flex-direction:column; min-width:0}
-
-
-.top{
-    display:flex;
-    gap:12px;
-    align-items:center; 
-    padding:12px 16px; 
-    border-bottom:1px solid var(--line); 
-    background:#fff; 
-    position:sticky; 
-    top:0;
-    width: 97%;     /* יתפרס על כל הרוחב */
-       
-    padding-right: 30px;
+.main{
+  display:flex; 
+  flex-direction:column; 
+  min-width:0;
+  background:#fefefe;
 }
 
-.search{
-    flex:1; 
-    padding:10px 12px; 
-    border:1px solid var(--line);
-    align-items:center; 
-    margin-left: 150px;
-    margin-right: 150px;
-    background-color: #efefef;
-    border-radius:250px; 
-    outline:none
-}
 
-.userbox{opacity:.8}
+
 
 
 
@@ -88,3 +70,81 @@ body{
   .layout{grid-template-columns: 1fr}
   .side{position:sticky; top:0; display:flex; gap:12px; overflow:auto}
 }
+
+
+/* פריסת הטופבר */
+.top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 12px;
+  font-family: 'Urbanist', sans-serif;
+  margin-top: 10px;
+  margin-left: 290px;
+  border: none;
+}
+
+/* מעטפת לשדה החיפוש */
+.searchbar {
+  position: relative;
+  align-items: center;
+  flex: 1;
+  max-width: 900px;        /* את יכולה להתאים */
+  border: none;
+}
+
+/* האייקון */
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  fill: #6b7280;           /* אפור עדין */
+  pointer-events: none;
+}
+
+/* קלט החיפוש בפורמט "פיל" */
+.search-input {
+  width: 80%;
+  height: 38px;
+  border: none;
+  outline: none;
+  border-radius: 9999px;   /* פיל */
+  padding: 0 16px 0 44px;  /* מקום לאייקון בצד שמאל */
+  background: #f1f2f4;     /* אפור בהיר כמו בתמונה */
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,0.06),
+    0 1px 0 rgba(255,255,255,0.6); /* מגע עדין */
+  color: #111827;
+  transition: box-shadow .15s ease, background .15s ease;
+  font-family: 'Urbanist', sans-serif;
+}
+
+/* פלייסהולדר אפור */
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+/* מצב פוקוס – טבעת עדינה */
+.search-input:focus {
+  background: #eef0f2;
+  box-shadow:
+    0 0 0 1px #e5e7eb,
+    inset 0 0 0 1px rgba(0,0,0,0.05);
+}
+
+/* אופציונלי: הובר קליל */
+.search-input:hover {
+  background: #f4f5f7;
+}
+
+/* יישור המשתמש לימין (אם צריך) */
+.userbox {
+  white-space: nowrap;
+  color: #4b5563;
+  font-weight: 500;
+  align-items: right;
+}
+

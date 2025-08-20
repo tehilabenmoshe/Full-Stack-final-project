@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./CategoryList.css"; // נוסיף קובץ עיצוב ייעודי
 
+import '../styles/CategoryList.css'
 export default function CategoryList() {
   const [categories, setCategories] = useState([]);
 
@@ -24,8 +24,8 @@ export default function CategoryList() {
   }, []);
 
   return (
-    <div>
-      <h2 style={{ marginBottom: "20px" }}>📂 קטגוריות בתפריט</h2>
+    <div className="category-menu">
+      <h2 className="category-title"> Just Click To Eat! </h2>
       <div className="categories-grid">
         {categories.map((cat) => (
           <div key={cat.id} className="category-card">
