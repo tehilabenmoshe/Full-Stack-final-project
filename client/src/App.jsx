@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Customer from './pages/Customer'
+import DishesPage from './pages/DishesPage'
 
 export default function App(){
   return (
@@ -17,6 +18,8 @@ export default function App(){
           <Route path="/Home" element={<Home/>} />
           <Route path="/Login" element={<Login/>} />
           <Route path="/Register" element={<Register/>} />
+          <Route path="/categories/:id" element={<DishesPage />} /> 
+
          
           
           

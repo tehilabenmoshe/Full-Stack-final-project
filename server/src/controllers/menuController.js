@@ -14,7 +14,7 @@ exports.getItems = async (req, res) => {
   try {
     const { categoryId } = req.query;
     if (!categoryId) return res.status(400).json({ error: 'categoryId is required' });
-    const items = await MenuModel.getItemsByCategory(Number(categoryId));
+    const items = await MenuModel.getItems(Number(categoryId));
     res.json(items);
   } catch (e) {
     console.error('getItems error:', e);

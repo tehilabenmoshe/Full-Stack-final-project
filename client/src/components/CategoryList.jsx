@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";   // ✅ הוספנו ניווט
 import axios from "axios";
-
 import '../styles/CategoryList.css'
+
+
 export default function CategoryList() {
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -28,7 +31,11 @@ export default function CategoryList() {
       <h2 className="category-title"> Just Click To Eat! </h2>
       <div className="categories-grid">
         {categories.map((cat) => (
-          <div key={cat.id} className="category-card">
+          <div 
+           key={cat.id}
+           className="category-card"
+            onClick={() => navigate(`/categories/${cat.id}`)}
+            >
             <img 
               src={cat.image_url} 
               alt={cat.name} 
