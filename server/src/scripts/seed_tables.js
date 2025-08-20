@@ -124,28 +124,28 @@ async function seedDishes() {
     { name: 'Family Pizza', description: 'Large pizza with cheese and olives', price: 55, category: 'Mains', image_url: '/photos/dishesPhotos/mains/pizza.jpg' },
 
     // Snacks
-    { name: 'Classic Fries', description: 'Crispy fries with sea salt', price: 18, category: 'Snacks', image_url: '/photos/dishesPhotos/mains/fries.jpg' },
-    { name: 'Onion Rings', description: 'Crispy battered onion rings', price: 20, category: 'Snacks', image_url: '/photos/dishesPhotos/mains/onion_rings.jpg' },
-    { name: 'Garlic Bread', description: 'Baked bread with garlic butter', price: 22, category: 'Snacks', image_url: '/photos/dishesPhotos/mains/garlic_bread.jpg' },
-    { name: 'Nachos with Salsa', description: 'Spicy nachos with salsa dip', price: 25, category: 'Snacks', image_url: '/photos/dishesPhotos/mains/nachos.jpg' },
+    { name: 'Classic Fries', description: 'Crispy fries with sea salt', price: 18, category: 'Snacks', image_url: '/photos/dishesPhotos/snacks/fries.jpg' },
+    { name: 'Onion Rings', description: 'Crispy battered onion rings', price: 20, category: 'Snacks', image_url: '/photos/dishesPhotos/snacks/onion_rings.jpg' },
+    { name: 'Garlic Bread', description: 'Baked bread with garlic butter', price: 22, category: 'Snacks', image_url: '/photos/dishesPhotos/snacks/garlic_bread.jpg' },
+    { name: 'Nachos with Salsa', description: 'Spicy nachos with salsa dip', price: 25, category: 'Snacks', image_url: '/photos/dishesPhotos/snacks/nachos.jpg' },
 
     // Desserts
-    { name: 'Chocolate Souffle', description: 'Warm chocolate cake with ice cream', price: 28, category: 'Desserts', image_url: '/photos/dishesPhotos/souffle.png' },
-    { name: 'Cheesecake', description: 'Cold cheesecake with biscuit base', price: 30, category: 'Desserts', image_url: '/photos/dishesPhotos/cheesecake.png' },
-    { name: 'Vanilla Ice Cream', description: 'Classic scoop of vanilla ice cream', price: 18, category: 'Desserts', image_url: '/photos/dishesPhotos/icecream.png' },
-    { name: 'Knafeh', description: 'Middle Eastern dessert with sweet cheese', price: 32, category: 'Desserts', image_url: '/photos/dishesPhotos/knafeh.png' },
+    { name: 'Chocolate Souffle', description: 'Warm chocolate cake with ice cream', price: 28, category: 'Desserts', image_url: '/photos/dishesPhotos/desserts/souffle.jpg' },
+    { name: 'Cheesecake', description: 'Cold cheesecake with biscuit base', price: 30, category: 'Desserts', image_url: '/photos/dishesPhotos/desserts/cheesecake.jpg' },
+    { name: 'Vanilla Ice Cream', description: 'Classic scoop of vanilla ice cream', price: 18, category: 'Desserts', image_url: '/photos/dishesPhotos/desserts/icecream.jpg' },
+    { name: 'Knafeh', description: 'Middle Eastern dessert with sweet cheese', price: 32, category: 'Desserts', image_url: '/photos/dishesPhotos/desserts/knafeh.jpg' },
 
     // Drinks
-    { name: 'Cola', description: '330ml cola bottle', price: 12, category: 'Drinks', image_url: '/photos/dishesPhotos/cola.png' },
-    { name: 'Mineral Water', description: '500ml mineral water bottle', price: 8, category: 'Drinks', image_url: '/photos/dishesPhotos/water.png' },
-    { name: 'Fresh Orange Juice', description: 'Freshly squeezed orange juice', price: 15, category: 'Drinks', image_url: '/photos/dishesPhotos/orange_juice.png' },
-    { name: 'Lemonade', description: 'Cold refreshing lemonade', price: 14, category: 'Drinks', image_url: '/photos/dishesPhotos/lemonade.png' },
+    { name: 'Cola', description: '330ml cola bottle', price: 12, category: 'Drinks', image_url: '/photos/dishesPhotos/drinks/cola.jpg' },
+    { name: 'Mineral Water', description: '500ml mineral water bottle', price: 8, category: 'Drinks', image_url: '/photos/dishesPhotos/drinks/water.jpg' },
+    { name: 'Fresh Orange Juice', description: 'Freshly squeezed orange juice', price: 15, category: 'Drinks', image_url: '/photos/dishesPhotos/drinks/orange_juice.jpg' },
+    { name: 'Lemonade', description: 'Cold refreshing lemonade', price: 14, category: 'Drinks', image_url: '/photos/dishesPhotos/drinks/lemonade.jpg' },
 
     // Salads
-    { name: 'Greek Salad', description: 'Salad with feta, olives and vegetables', price: 32, category: 'Salads', image_url: '/photos/dishesPhotos/greek_salad.png' },
-    { name: 'Caesar Salad', description: 'Lettuce, croutons and parmesan with Caesar dressing', price: 35, category: 'Salads', image_url: '/photos/dishesPhotos/caesar.png' },
-    { name: 'Quinoa Salad', description: 'Quinoa with fresh vegetables and herbs', price: 34, category: 'Salads', image_url: '/photos/dishesPhotos/quinoa.png' },
-    { name: 'Chopped Vegetable Salad', description: 'Finely chopped cucumber, tomato, pepper and onion', price: 28, category: 'Salads', image_url: '/photos/dishesPhotos/veggie_salad.png' }
+    { name: 'Greek Salad', description: 'Salad with feta, olives and vegetables', price: 32, category: 'Salads', image_url: '/photos/dishesPhotos/salads/greek_salad.jpg' },
+    { name: 'Caesar Salad', description: 'Lettuce, croutons and parmesan with Caesar dressing', price: 35, category: 'Salads', image_url: '/photos/dishesPhotos/salads/caesar.jpg' },
+    { name: 'Quinoa Salad', description: 'Quinoa with fresh vegetables and herbs', price: 34, category: 'Salads', image_url: '/photos/dishesPhotos/salads/quinoa.jpg' },
+    { name: 'Chopped Vegetable Salad', description: 'Finely chopped cucumber, tomato, pepper and onion', price: 28, category: 'Salads', image_url: '/photos/dishesPhotos/salads/veggie_salad.jpg' }
   ];
 
   for (const d of dishes) {
