@@ -13,6 +13,7 @@ app.use('/photos', express.static(path.join(__dirname, '../photos')));
 app.use('/api/users', require('./routes/users.routes'));
 //app.use('/api/restaurants', require('./routes/restaurants'));
 app.use('/api/menu', require('./routes/menu.routes'));
+app.use('/api/cart', require('./routes/cart.routes'));
 //app.use('/api/cart', require('./routes/cart'));
 //app.use('/api/orders', require('./routes/orders'));
 
