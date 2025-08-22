@@ -3,6 +3,7 @@ import { Navigate, Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar'
 import Topbar from '../components/Topbar'
 import CategoryList from '../components/CategoryList';
+import CartButton from '../components/CartButton'; 
 import '../styles/customer.css'
 import { useAuth } from '../AuthProvider';
 import { Outlet } from 'react-router-dom';
@@ -18,6 +19,9 @@ function Customer(){
             <div className="sidebar"><Sidebar /></div>
                 <div className="main">
                     <Topbar query={q} onChange={setQ} />
+                    <div className="customer-header">
+                        <CartButton />           {/* 👈 כאן האייקון + הבדג’ והמגירה */}
+                    </div>
                     {/* כאן ירונדרו הדפים הפנימיים (קטגוריות / מנות) */}
                     <Outlet context={{ query: q }} />
                 </div>

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import DishModal from "../components/DishModal";
 import "../styles/DishesPage.css";
+import { useCart } from "../CartProvider";
 
 const API = (import.meta.env.VITE_API_URL || 'http://localhost:3000/api').replace(/\/$/, '');
 const authHeaders = () => ({ Authorization: `Bearer ${localStorage.getItem("token") || ""}` });
@@ -12,6 +13,7 @@ export default function DishesPage() {
   const [dishes, setDishes] = useState([]);
   const [activeDish, setActiveDish] = useState(null);
   const [error, setError] = useState('');
+  const { addItem } = useCart();
 
   useEffect(() => {
     if (!localStorage.getItem('token')) { setError('Not authenticated'); return; }
@@ -29,13 +31,20 @@ export default function DishesPage() {
       });
   }, [id]);
 
-  async function handleAddToCart({ dishId, qty, addons, note }) {
+  /*async function handleAddToCart({ dishId, qty, addons, note }) {
     try {
       await axios.post(`${API}/cart/add`, { dishId, qty, addons, note }, { headers: authHeaders() });
       setActiveDish(null);
     } catch (e) {
       setError(e.response?.data?.error || 'Failed to add to cart');
     }
+  }
+    */
+
+  
+  async function handleAddToCart(payload) {
+    await addItem(payload);   // זה גם מרענן את העגלה
+    setActiveDish(null);
   }
 
   return (
