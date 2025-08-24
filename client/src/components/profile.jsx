@@ -15,6 +15,7 @@ export default function Profile() {
     confirmPassword: ""
   });
   const [message, setMessage] = useState("");
+  const [orders, setOrders] = useState([]);
 
   //get user details
   useEffect(() => {
@@ -30,6 +31,17 @@ export default function Profile() {
         });
     }
   }, [user, token]);
+  useEffect(() => {
+  if (user && token) {
+    axios
+      .get(`http://localhost:3000/api/orders/user/${user.id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then((res) => setOrders(res.data))
+      .catch((err) => console.error("Error loading orders:", err));
+  }
+}, [user, token]);
+
 
   // change pass 
   const handlePasswordChange = async (e) => {
@@ -50,7 +62,7 @@ export default function Profile() {
     }
   };
 
-  //delete account
+  //
   const handleDelete = async () => {
     if (!window.confirm("בטוחה שאת רוצה למחוק את החשבון?")) return;
     try {
@@ -58,7 +70,7 @@ export default function Profile() {
         headers: { Authorization: `Bearer ${token}` }
       });
       logout();
-      navigate("/register"); 
+      navigate("/register"); // מחזיר לעמוד הרשמה
     } catch (err) {
       setMessage(err.response?.data?.message || "שגיאה במחיקת החשבון");
     }
@@ -79,8 +91,37 @@ export default function Profile() {
           <p><b>טלפון:</b> {profile.phone}</p>
         </div>
       )}
+        <h3>ההזמנות הקודמות שלי</h3>
+        {orders.length === 0 ? (
+  <p>אין הזמנות קודמות</p>
+) : (
+<div className="orders-list">
+  {orders.map(order => (
+    <div key={order.id} className="order-card">
+      <p><b>תאריך:</b> {new Date(order.order_date).toLocaleString()}</p>
+      <p><b>סכום כולל:</b> {order.total_price} ₪</p>
+      <p><b>סטטוס:</b> {order.status}</p>
+
+      <ul>
+        {order.items && order.items.length > 0 ? (
+          order.items.map(item => (
+            <li key={item.id}>
+              🍽️ {item.dish_name} × {item.quantity} — ₪{item.price}
+            </li>
+          ))
+        ) : (
+          <li>אין פריטים בהזמנה זו</li>
+        )}
+      </ul>
+    </div>
+  ))}
+</div>
+
+)}
 
       <hr />
+
+
 
       <h3>שינוי סיסמה</h3>
       <form onSubmit={handlePasswordChange}>

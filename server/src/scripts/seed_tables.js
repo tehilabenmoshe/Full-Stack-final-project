@@ -160,34 +160,77 @@ async function seedDishes() {
 
 
 // add orders data func
-async function seedOrders() {
-  try {
-    // נכניס הזמנה חדשה ל-user_id = 1
-    const [orderResult] = await pool.query(
-      `INSERT INTO orders (user_id, status, total_price)
-       VALUES (?, ?, ?)`,
-      [1, 'pending', 122.00]  // סה"כ 2×Pizza + 1×Cola
-    );
+// async function seedOrders() {
+//   try {
+//     // נכניס הזמנה חדשה ל-user_id = 1
+//     const [orderResult] = await pool.query(
+//       `INSERT INTO orders (user_id, status, total_price)
+//        VALUES (?, ?, ?)`,
+//       [1, 'pending', 122.00]  // סה"כ 2×Pizza + 1×Cola
+//     );
 
     
-    const orderId = orderResult.insertId;
+//     const orderId = orderResult.insertId;
 
-    // add orderItems
+//     // add orderItems
+//     await pool.query(
+//       `INSERT INTO order_items (order_id, dish_id, quantity, price)
+//        VALUES (?, ?, ?, ?), (?, ?, ?, ?)`,
+//       [
+//         orderId, 4, 2, 55.00,   // Family Pizza (dish_id = 4, כמות 2)
+//         orderId, 13, 1, 12.00   // Cola (dish_id = 13, כמות 1)
+//       ]
+//     );
+
+//     console.log(` order #${orderId} added`);
+//   } catch (err) {
+//     console.error('Error adding order', err);
+//   }
+// }
+
+async function seedOrders() {
+  try {
+    // === הזמנה ראשונה ===
+    const [orderResult1] = await pool.query(
+      `INSERT INTO orders (user_id, status, total_price)
+       VALUES (?, ?, ?)`,
+      [1, 'pending', 122.00] // 2×Pizza + 1×Cola
+    );
+    const orderId1 = orderResult1.insertId;
+
     await pool.query(
       `INSERT INTO order_items (order_id, dish_id, quantity, price)
        VALUES (?, ?, ?, ?), (?, ?, ?, ?)`,
       [
-        orderId, 4, 2, 55.00,   // Family Pizza (dish_id = 4, כמות 2)
-        orderId, 13, 1, 12.00   // Cola (dish_id = 13, כמות 1)
+        orderId1, 4, 2, 55.00,  // Family Pizza (id=4, כמות 2)
+        orderId1, 13, 1, 12.00  // Cola (id=13, כמות 1)
       ]
     );
 
-    console.log(` order #${orderId} added`);
+    console.log(`order #${orderId1} added`);
+
+    // === הזמנה שנייה ===
+    const [orderResult2] = await pool.query(
+      `INSERT INTO orders (user_id, status, total_price)
+       VALUES (?, ?, ?)`,
+      [1, 'completed', 80.00] // לדוגמה 2×Pasta
+    );
+    const orderId2 = orderResult2.insertId;
+
+    await pool.query(
+      `INSERT INTO order_items (order_id, dish_id, quantity, price)
+       VALUES (?, ?, ?, ?)`,
+      [
+        orderId2, 3, 2, 40.00   // Pasta (id=3, כמות 2 במחיר 40 כל אחד)
+      ]
+    );
+
+    console.log(`order #${orderId2} added`);
+
   } catch (err) {
-    console.error('Error adding order', err);
+    console.error('Error adding orders', err);
   }
 }
-
 
 // main add data func
 async function seed() {

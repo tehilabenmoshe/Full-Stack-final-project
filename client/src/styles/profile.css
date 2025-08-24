@@ -126,3 +126,24 @@ form button:hover {
   text-align: right; 
 }
 
+.order-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
+  direction: rtl;
+  text-align: right;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.order-card ul {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.order-card li {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
