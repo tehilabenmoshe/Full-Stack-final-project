@@ -7,7 +7,7 @@ import Register from './pages/Register'
 import Customer from './pages/Customer'
 import DishesPage from './pages/DishesPage'
 import CategoryList from './components/CategoryList'
-
+import Profile from './components/Profile';
 export default function App(){
   return (
     <>
@@ -23,6 +23,8 @@ export default function App(){
             <Route index element={<CategoryList />} />                      {/* /customer */}
             <Route path="categories/:id" element={<DishesPage />} />        {/* /customer/categories/:id */}
           </Route>
+
+          <Route path="/customer/profile" element={<Profile />} />
 
 
           <Route path="*" element={<Navigate to="/login" replace />} /> 

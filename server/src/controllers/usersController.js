@@ -159,3 +159,39 @@ exports.remove = async (req, res) => {
     return res.status(500).json({ error: 'Failed to delete user' });
   }
 };
+
+/** PUT /api/users/:id/password */
+exports.changePassword = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id <= 0) {
+      return res.status(400).json({ error: "Invalid id" });
+    }
+
+    const { oldPassword, newPassword } = req.body || {};
+    if (!oldPassword || !newPassword) {
+      return res.status(400).json({ error: "Both old and new passwords are required" });
+    }
+
+    //find user
+    const user = await UserModel.findById(id);
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    // compare passwords
+    const match = await bcrypt.compare(oldPassword, user.password_hash);
+    if (!match) {
+      return res.status(400).json({ error: "Old password incorrect" });
+    }
+
+    // update pass in DB
+    const password_hash = await bcrypt.hash(newPassword, 10);
+    const ok = await UserModel.update(id, { password_hash });
+    if (!ok) return res.status(500).json({ error: "Failed to update password" });
+
+    return res.json({ message: "Password updated successfully" });
+  } catch (err) {
+    console.error("changePassword error:", err);
+    return res.status(500).json({ error: "Server error" });
+  }
+};
+

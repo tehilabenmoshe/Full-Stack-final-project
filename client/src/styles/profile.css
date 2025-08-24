@@ -1,0 +1,128 @@
+:root {
+  --bg: #f7f7f8;
+  --card: #fff;
+  --line: #eaeaea;
+  --brand: #ff4d4f;
+  font-family: 'Urbanist', sans-serif;
+}
+
+.profile-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  font-family: 'Urbanist', sans-serif;
+}
+
+.profile-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.user-info {
+  background: #fafafa;
+  padding: 18px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.user-info p {
+  margin: 6px 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+
+h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #222;
+  text-align: right;
+}
+
+/*  update pass form */
+form {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+form input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #f7f7f8;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+form input:focus {
+  outline: none;
+  border-color: var(--brand);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 77, 79, 0.2);
+}
+
+/* update password botton*/
+form button {
+  background: var(--brand);
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+form button:hover {
+  background: #e63b3d;
+}
+
+/* כפתור מחיקה */
+.delete-btn {
+  background: #f44336;
+  color: #fff;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #d7372b;
+}
+
+
+.message {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--brand);
+  text-align: center;
+}
+
+.profile-container {
+  direction: rtl; 
+  text-align: right; 
+}
+
+.user-info {
+  text-align: right; 
+}
+

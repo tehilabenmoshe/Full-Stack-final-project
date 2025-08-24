@@ -19,4 +19,7 @@ router.get('/:id', usersCtrl.requireAuth, usersCtrl.getById);
 router.put('/:id', usersCtrl.requireAuth, usersCtrl.update);
 router.delete('/:id', usersCtrl.requireAuth, usersCtrl.remove);
 
+// change pass with old pass check
+router.put('/:id/password', usersCtrl.requireAuth, usersCtrl.changePassword);
+
 module.exports = router;
