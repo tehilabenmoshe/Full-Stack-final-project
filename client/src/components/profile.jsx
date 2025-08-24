@@ -106,7 +106,7 @@ export default function Profile() {
         {order.items && order.items.length > 0 ? (
           order.items.map(item => (
             <li key={item.id}>
-              🍽️ {item.dish_name} × {item.quantity} — ₪{item.price}
+              {item.dish_name} × {item.quantity} — ₪{item.price}
             </li>
           ))
         ) : (
