@@ -11,7 +11,7 @@
   height: 56px;             /* h-14 */
   border-radius: 9999px;    /* rounded-full */
 
-  background-color: #ff561e; /* indigo→purple */
+  background-color: #ffc31e; /* indigo→purple */
   box-shadow: 0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.05);
   border: none;
   cursor: pointer;

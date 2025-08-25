@@ -16,15 +16,16 @@ export default function App(){
         <Routes>
           <Route path="/" element={<Login/>} />
           <Route path="/Home" element={<Home/>} />
-          <Route path="/Login" element={<Login/>} />
+          <Route path="/login" element={<Login/>} />
           <Route path="/Register" element={<Register/>} />
 
           <Route path="/customer" element={<Customer />}>
             <Route index element={<CategoryList />} />                      {/* /customer */}
             <Route path="categories/:id" element={<DishesPage />} />        {/* /customer/categories/:id */}
+            <Route path="/customer/profile" element={<Profile />} />
           </Route>
 
-          <Route path="/customer/profile" element={<Profile />} />
+          
 
 
           <Route path="*" element={<Navigate to="/login" replace />} /> 
