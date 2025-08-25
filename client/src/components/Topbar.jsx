@@ -1,8 +1,17 @@
 import { useAuth } from '../AuthProvider'; 
+import { useNavigate } from "react-router-dom";
 
 export default function Topbar({ query, onChange }) {
-  const { user } = useAuth(); 
+  const { user, logout } = useAuth();
   const displayName = user?.username ?? user?.name ?? 'Guest';
+  const nav = useNavigate();
+
+
+  const handleLogout = () => {
+    logout();                 // ניקוי user+token
+    nav("/Login", { replace: true }); // חזרה למסך התחברות
+  };
+
 
   return (
     <header className="top">
@@ -25,7 +34,15 @@ export default function Topbar({ query, onChange }) {
         />
       </div>
 
-      <div className="userbox">Welcome, {displayName}!</div>
+      <div className="top-right">
+        <div className="userbox">Welcome, {displayName}!</div>
+
+        <button className="logout-btn" onClick={handleLogout} aria-label="Log out">
+          
+          <span>Logout</span>
+        </button>
+      </div>
+
     </header>
   );
 }

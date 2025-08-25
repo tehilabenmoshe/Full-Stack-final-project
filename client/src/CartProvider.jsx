@@ -2,44 +2,71 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import axios from "axios";
 
 const API = (import.meta.env.VITE_API_URL || "http://localhost:3000/api").replace(/\/$/, "");
-const auth = () => ({ Authorization: `Bearer ${localStorage.getItem("token") || ""}` });
+
+// מחזיר headers רק אם יש טוקן. בלי טוקן — undefined (לא שולחים Authorization בכלל)
+function authHeaders() {
+  const t = localStorage.getItem("token");
+  return t ? { Authorization: `Bearer ${t}` } : undefined;
+}
 
 const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
   const [orderId, setOrderId] = useState(null);
-  const [items, setItems]   = useState([]);
-  const [total, setTotal]   = useState(0);
+  const [items, setItems] = useState([]);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const load = useCallback(async () => {
+    const headers = authHeaders();
+    if (!headers) {           // אין טוקן -> לא שולחים בקשה ולא זורקים שגיאה
+      setOrderId(null); setItems([]); setTotal(0);
+      return;
+    }
+    setLoading(true);
     try {
-      setLoading(true);
-      const res = await axios.get(`${API}/cart`, { headers: auth() });
-      setOrderId(res.data?.orderId ?? null);
-      setItems(res.data?.items ?? []);
-      setTotal(res.data?.total ?? 0);
-    } finally { setLoading(false); }
+      const { data } = await axios.get(`${API}/cart`, { headers });
+      setOrderId(data?.orderId ?? null);
+      setItems(data?.items ?? []);
+      setTotal(data?.total ?? 0);
+    } catch (e) {
+      const status = e.response?.status;
+      console.warn("load cart error:", status, e.response?.data || e.message);
+      if (status === 401) {   // טוקן פג/חסר/לא תקין
+        setOrderId(null); setItems([]); setTotal(0);
+      }
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   const addItem = useCallback(async ({ dishId, qty, addons, note }) => {
-    await axios.post(`${API}/cart/add`, { dishId, qty, addons, note }, { headers: auth() });
+    const headers = authHeaders();
+    if (!headers) return;     // לא מחוברים
+    await axios.post(`${API}/cart/add`, { dishId, qty, addons, note }, { headers });
     await load();
   }, [load]);
 
   const updateQty = useCallback(async (itemId, qty) => {
-    await axios.patch(`${API}/cart/item/${itemId}`, { qty }, { headers: auth() });
+    const headers = authHeaders();
+    if (!headers) return;
+    await axios.patch(`${API}/cart/item/${itemId}`, { qty }, { headers });
     await load();
   }, [load]);
 
   const removeItem = useCallback(async (itemId) => {
-    await axios.delete(`${API}/cart/item/${itemId}`, { headers: auth() });
+    const headers = authHeaders();
+    if (!headers) return;
+    await axios.delete(`${API}/cart/item/${itemId}`, { headers });
     await load();
   }, [load]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { load(); }, [load]); // רץ רק כשיש טוקן (guard בתוך load)
 
-  const count = useMemo(() => items.reduce((s, it) => s + Number(it.quantity || 0), 0), [items]);
+  const count = useMemo(
+    () => items.reduce((sum, it) => sum + Number(it.quantity || 0), 0),
+    [items]
+  );
 
   return (
     <CartContext.Provider value={{ orderId, items, total, count, loading, load, addItem, updateQty, removeItem }}>

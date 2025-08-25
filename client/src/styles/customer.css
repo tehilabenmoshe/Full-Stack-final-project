@@ -172,3 +172,20 @@ body{
   font-size:12px; line-height:18px; text-align:center; font-weight:700;
 }
 
+.top { display:flex; align-items:center; justify-content:space-between; }
+.top-right { display:flex; align-items:center; gap:12px; }
+
+.logout-btn {
+  font-family: 'Urbanist', sans-serif;
+  display:flex; align-items:center; gap:6px;
+  border:1px solid #e7e7e7; background:#fff;
+  background: linear-gradient(to right, #ff3463,  #ffb443); 
+  color: #ffffff;
+  padding:8px 12px; border-radius:10px; cursor:pointer;
+}
+
+
+.logout-btn:hover {
+  opacity: 0.85;
+}
+
