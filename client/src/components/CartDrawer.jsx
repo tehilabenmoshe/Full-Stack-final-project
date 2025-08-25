@@ -1,4 +1,4 @@
-import { useCart } from "../CartProvider";
+import { useCart } from "./CartProvider";
 
 export default function CartDrawer({ onClose }) {
   const { items, total, loading, updateQty, removeItem } = useCart();

@@ -1,11 +1,27 @@
 const pool = require('../db_connection');
 const bcrypt = require('bcryptjs');
 
+/** ✅ דואגים שהעמודה note קיימת ב-order_items */
+async function ensureSchema() {
+  const [[exists]] = await pool.query(
+    `SELECT 1 AS ok
+     FROM information_schema.COLUMNS
+     WHERE TABLE_SCHEMA = DATABASE()
+       AND TABLE_NAME = 'order_items'
+       AND COLUMN_NAME = 'note'
+     LIMIT 1`
+  );
+  if (!exists) {
+    console.log('🛠  Adding column order_items.note ...');
+    await pool.query(`ALTER TABLE order_items ADD COLUMN note TEXT NULL`);
+    console.log('✅  Column order_items.note added');
+  }
+}
+
 // clean tables func
 async function clearData() {
   console.log('🗑 Clearing tables...');
 
-  
   await pool.query('DELETE FROM order_items');
   await pool.query('ALTER TABLE order_items AUTO_INCREMENT = 1');
 
@@ -53,7 +69,7 @@ async function seedUsers() {
     ];
 
     for (const user of sampleUsers) {
-      const password_hash = await bcrypt.hash('Password123', 10); // same password for all
+      const password_hash = await bcrypt.hash('Password123', 10);
       await pool.query(
         `INSERT INTO users (name, email, password_hash, phone, role, created_at)
          VALUES (?, ?, ?, ?, ?, NOW())`,
@@ -70,31 +86,11 @@ async function seedUsers() {
 // add categories data func
 async function seedCategories() {
   const categories = [
-    { 
-      name: 'Mains', 
-      description: 'Hot and fresh main dishes',
-      image_url: '/photos/categoriesPhotos/mains.png'
-    },
-    { 
-      name: 'Snacks', 
-      description: 'Small bites and appetizers',
-      image_url: '/photos/categoriesPhotos/snacks.png'
-    },
-    { 
-      name: 'Desserts', 
-      description: 'Cakes, sweets and pastries',
-      image_url: '/photos/categoriesPhotos/desserts.png'
-    },
-    { 
-      name: 'Salads', 
-      description: 'Fresh and healthy salads',
-      image_url: '/photos/categoriesPhotos/salads.png'
-    },
-    { 
-      name: 'Drinks', 
-      description: 'Refreshing cold drinks',
-      image_url: '/photos/categoriesPhotos/drinks.png'
-    }
+    { name: 'Mains',   description: 'Hot and fresh main dishes',  image_url: '/photos/categoriesPhotos/mains.png' },
+    { name: 'Snacks',  description: 'Small bites and appetizers', image_url: '/photos/categoriesPhotos/snacks.png' },
+    { name: 'Desserts',description: 'Cakes, sweets and pastries', image_url: '/photos/categoriesPhotos/desserts.png' },
+    { name: 'Salads',  description: 'Fresh and healthy salads',   image_url: '/photos/categoriesPhotos/salads.png' },
+    { name: 'Drinks',  description: 'Refreshing cold drinks',     image_url: '/photos/categoriesPhotos/drinks.png' }
   ];
 
   for (const c of categories) {
@@ -106,45 +102,41 @@ async function seedCategories() {
   console.log('Categories with images added');
 }
 
-
-
 // add dishes data func
 async function seedDishes() {
   const [categories] = await pool.query(`SELECT id, name FROM categories`);
   const categoryMap = {};
-  for (const c of categories) {
-    categoryMap[c.name] = c.id;
-  }
+  for (const c of categories) categoryMap[c.name] = c.id;
 
   const dishes = [
     // Mains
-    { name: 'Shawarma in Pita', description: 'Fresh shawarma with tahini and salad', price: 38, category: 'Mains', image_url: '/photos/dishesPhotos/mains/shawarma.jpg' },
-    { name: 'Grilled Chicken Breast', description: 'Juicy grilled chicken breast', price: 42, category: 'Mains', image_url: '/photos/dishesPhotos/mains/chicken.jpg' },
+    { name: 'Shawarma in Pita', description: 'Fresh shawarma with tahini and salad', price: 38, category: 'Mains',   image_url: '/photos/dishesPhotos/mains/shawarma.jpg' },
+    { name: 'Grilled Chicken Breast', description: 'Juicy grilled chicken breast',  price: 42, category: 'Mains',   image_url: '/photos/dishesPhotos/mains/chicken.jpg' },
     { name: 'Pasta with Tomato Sauce', description: 'Italian pasta with rich tomato sauce', price: 36, category: 'Mains', image_url: '/photos/dishesPhotos/mains/pasta.jpg' },
-    { name: 'Family Pizza', description: 'Large pizza with cheese and olives', price: 55, category: 'Mains', image_url: '/photos/dishesPhotos/mains/pizza.jpg' },
+    { name: 'Family Pizza', description: 'Large pizza with cheese and olives',      price: 55, category: 'Mains',   image_url: '/photos/dishesPhotos/mains/pizza.jpg' },
 
     // Snacks
-    { name: 'Classic Fries', description: 'Crispy fries with sea salt', price: 18, category: 'Snacks', image_url: '/photos/dishesPhotos/snacks/fries.jpg' },
-    { name: 'Onion Rings', description: 'Crispy battered onion rings', price: 20, category: 'Snacks', image_url: '/photos/dishesPhotos/snacks/onion_rings.jpg' },
-    { name: 'Garlic Bread', description: 'Baked bread with garlic butter', price: 22, category: 'Snacks', image_url: '/photos/dishesPhotos/snacks/garlic_bread.jpg' },
-    { name: 'Nachos with Salsa', description: 'Spicy nachos with salsa dip', price: 25, category: 'Snacks', image_url: '/photos/dishesPhotos/snacks/nachos.jpg' },
+    { name: 'Classic Fries', description: 'Crispy fries with sea salt',             price: 18, category: 'Snacks',  image_url: '/photos/dishesPhotos/snacks/fries.jpg' },
+    { name: 'Onion Rings',   description: 'Crispy battered onion rings',            price: 20, category: 'Snacks',  image_url: '/photos/dishesPhotos/snacks/onion_rings.jpg' },
+    { name: 'Garlic Bread',  description: 'Baked bread with garlic butter',         price: 22, category: 'Snacks',  image_url: '/photos/dishesPhotos/snacks/garlic_bread.jpg' },
+    { name: 'Nachos with Salsa', description: 'Spicy nachos with salsa dip',        price: 25, category: 'Snacks',  image_url: '/photos/dishesPhotos/snacks/nachos.jpg' },
 
     // Desserts
     { name: 'Chocolate Souffle', description: 'Warm chocolate cake with ice cream', price: 28, category: 'Desserts', image_url: '/photos/dishesPhotos/desserts/souffle.jpg' },
-    { name: 'Cheesecake', description: 'Cold cheesecake with biscuit base', price: 30, category: 'Desserts', image_url: '/photos/dishesPhotos/desserts/cheesecake.jpg' },
+    { name: 'Cheesecake',        description: 'Cold cheesecake with biscuit base',  price: 30, category: 'Desserts', image_url: '/photos/dishesPhotos/desserts/cheesecake.jpg' },
     { name: 'Vanilla Ice Cream', description: 'Classic scoop of vanilla ice cream', price: 18, category: 'Desserts', image_url: '/photos/dishesPhotos/desserts/icecream.jpg' },
-    { name: 'Knafeh', description: 'Middle Eastern dessert with sweet cheese', price: 32, category: 'Desserts', image_url: '/photos/dishesPhotos/desserts/knafeh.jpg' },
+    { name: 'Knafeh',            description: 'Middle Eastern dessert with sweet cheese', price: 32, category: 'Desserts', image_url: '/photos/dishesPhotos/desserts/knafeh.jpg' },
 
     // Drinks
-    { name: 'Cola', description: '330ml cola bottle', price: 12, category: 'Drinks', image_url: '/photos/dishesPhotos/drinks/cola.jpg' },
-    { name: 'Mineral Water', description: '500ml mineral water bottle', price: 8, category: 'Drinks', image_url: '/photos/dishesPhotos/drinks/water.jpg' },
-    { name: 'Fresh Orange Juice', description: 'Freshly squeezed orange juice', price: 15, category: 'Drinks', image_url: '/photos/dishesPhotos/drinks/orange_juice.jpg' },
-    { name: 'Lemonade', description: 'Cold refreshing lemonade', price: 14, category: 'Drinks', image_url: '/photos/dishesPhotos/drinks/lemonade.jpg' },
+    { name: 'Cola',            description: '330ml cola bottle',                    price: 12, category: 'Drinks',  image_url: '/photos/dishesPhotos/drinks/cola.jpg' },
+    { name: 'Mineral Water',   description: '500ml mineral water bottle',           price: 8,  category: 'Drinks',  image_url: '/photos/dishesPhotos/drinks/water.jpg' },
+    { name: 'Fresh Orange Juice', description: 'Freshly squeezed orange juice',     price: 15, category: 'Drinks',  image_url: '/photos/dishesPhotos/drinks/orange_juice.jpg' },
+    { name: 'Lemonade',        description: 'Cold refreshing lemonade',             price: 14, category: 'Drinks',  image_url: '/photos/dishesPhotos/drinks/lemonade.jpg' },
 
     // Salads
-    { name: 'Greek Salad', description: 'Salad with feta, olives and vegetables', price: 32, category: 'Salads', image_url: '/photos/dishesPhotos/salads/greek_salad.jpg' },
+    { name: 'Greek Salad',  description: 'Salad with feta, olives and vegetables',  price: 32, category: 'Salads',  image_url: '/photos/dishesPhotos/salads/greek_salad.jpg' },
     { name: 'Caesar Salad', description: 'Lettuce, croutons and parmesan with Caesar dressing', price: 35, category: 'Salads', image_url: '/photos/dishesPhotos/salads/caesar.jpg' },
-    { name: 'Quinoa Salad', description: 'Quinoa with fresh vegetables and herbs', price: 34, category: 'Salads', image_url: '/photos/dishesPhotos/salads/quinoa.jpg' },
+    { name: 'Quinoa Salad', description: 'Quinoa with fresh vegetables and herbs',  price: 34, category: 'Salads',  image_url: '/photos/dishesPhotos/salads/quinoa.jpg' },
     { name: 'Chopped Vegetable Salad', description: 'Finely chopped cucumber, tomato, pepper and onion', price: 28, category: 'Salads', image_url: '/photos/dishesPhotos/salads/veggie_salad.jpg' }
   ];
 
@@ -158,52 +150,23 @@ async function seedDishes() {
   console.log('Dishes with dummy images added');
 }
 
-
-// add orders data func
-// async function seedOrders() {
-//   try {
-//     // נכניס הזמנה חדשה ל-user_id = 1
-//     const [orderResult] = await pool.query(
-//       `INSERT INTO orders (user_id, status, total_price)
-//        VALUES (?, ?, ?)`,
-//       [1, 'pending', 122.00]  // סה"כ 2×Pizza + 1×Cola
-//     );
-
-    
-//     const orderId = orderResult.insertId;
-
-//     // add orderItems
-//     await pool.query(
-//       `INSERT INTO order_items (order_id, dish_id, quantity, price)
-//        VALUES (?, ?, ?, ?), (?, ?, ?, ?)`,
-//       [
-//         orderId, 4, 2, 55.00,   // Family Pizza (dish_id = 4, כמות 2)
-//         orderId, 13, 1, 12.00   // Cola (dish_id = 13, כמות 1)
-//       ]
-//     );
-
-//     console.log(` order #${orderId} added`);
-//   } catch (err) {
-//     console.error('Error adding order', err);
-//   }
-// }
-
+// add orders data func (עם הערות per item)
 async function seedOrders() {
   try {
     // === הזמנה ראשונה ===
     const [orderResult1] = await pool.query(
-      `INSERT INTO orders (user_id, status, total_price)
-       VALUES (?, ?, ?)`,
+      `INSERT INTO orders (user_id, status, total_price) VALUES (?, ?, ?)`,
       [1, 'pending', 122.00] // 2×Pizza + 1×Cola
     );
     const orderId1 = orderResult1.insertId;
 
+    // ⬇️ שמים note לכל שורה
     await pool.query(
-      `INSERT INTO order_items (order_id, dish_id, quantity, price)
-       VALUES (?, ?, ?, ?), (?, ?, ?, ?)`,
+      `INSERT INTO order_items (order_id, dish_id, quantity, price, note)
+       VALUES (?, ?, ?, ?, ?), (?, ?, ?, ?, ?)`,
       [
-        orderId1, 4, 2, 55.00,  // Family Pizza (id=4, כמות 2)
-        orderId1, 13, 1, 12.00  // Cola (id=13, כמות 1)
+        orderId1, 4, 2, 55.00, 'Extra olives, no mushrooms',
+        orderId1, 13, 1, 12.00, 'Cold please'
       ]
     );
 
@@ -211,17 +174,16 @@ async function seedOrders() {
 
     // === הזמנה שנייה ===
     const [orderResult2] = await pool.query(
-      `INSERT INTO orders (user_id, status, total_price)
-       VALUES (?, ?, ?)`,
+      `INSERT INTO orders (user_id, status, total_price) VALUES (?, ?, ?)`,
       [1, 'completed', 80.00] // לדוגמה 2×Pasta
     );
     const orderId2 = orderResult2.insertId;
 
     await pool.query(
-      `INSERT INTO order_items (order_id, dish_id, quantity, price)
-       VALUES (?, ?, ?, ?)`,
+      `INSERT INTO order_items (order_id, dish_id, quantity, price, note)
+       VALUES (?, ?, ?, ?, ?)`,
       [
-        orderId2, 3, 2, 40.00   // Pasta (id=3, כמות 2 במחיר 40 כל אחד)
+        orderId2, 3, 2, 40.00, 'Gluten-free pasta if possible'
       ]
     );
 
@@ -235,6 +197,7 @@ async function seedOrders() {
 // main add data func
 async function seed() {
   try {
+    await ensureSchema();     // ✅ לפני הכל: לוודא שיש עמודת note
     await clearData();
     await seedUsers();
     await seedCategories();

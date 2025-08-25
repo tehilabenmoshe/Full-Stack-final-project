@@ -1,0 +1,248 @@
+/* ********************************************Cart ********************************** */
+.cart-button {
+  margin-right: 40px;
+  margin-top: 30px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 56px;              /* w-14 */
+  height: 56px;             /* h-14 */
+  border-radius: 9999px;    /* rounded-full */
+
+  background-color: #ff561e; /* indigo→purple */
+  box-shadow: 0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.05);
+  border: none;
+  cursor: pointer;
+
+  transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+}
+
+.cart-button:hover {
+  transform: scale(1.08);
+  filter: brightness(1.05);
+}
+
+.cart-button:active {
+  transform: scale(0.96);
+}
+
+.cart-button:focus-visible {
+  outline: 3px solid #f59e0b;   /* amber */
+  outline-offset: 3px;
+}
+
+/* Icon size/color */
+.cart-icon {
+  width: 28px;
+  height: 28px;
+  color: #fff;
+}
+
+/* Badge (items counter) */
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  background: #dc2626;         /* red-600 */
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+
+  /* bounce-like entrance */
+  animation: cart-bounce-in .4s ease;
+}
+
+/* Optional subtle repeating bounce (comment out if לא רוצים) */
+@keyframes cart-bounce-in {
+  0%   { transform: scale(.4); opacity: 0; }
+  60%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cart-button,
+  .cart-badge {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Dark mode (אם יש לך class="dark" ב-HTML או body) */
+.dark .cart-button {
+  box-shadow: 0 10px 15px rgba(0,0,0,.35), 0 4px 6px rgba(0,0,0,.25);
+}
+
+
+
+/* ===== BACKDROP ===== */
+.cart-backdrop {
+  font-family: 'Urbanist', sans-serif;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 50;
+  animation: fadeIn .3s ease;
+}
+
+/* ===== DRAWER ===== */
+.cart-drawer {
+  width: 360px;
+  max-width: 90%;
+  height: 100%;
+  background: #fff;
+  box-shadow: -4px 0 12px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  animation: slideIn .3s ease;
+}
+
+/* ===== HEADER ===== */
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.cart-close {
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  color: #555;
+  transition: color .2s;
+}
+.cart-close:hover {
+  color: #000;
+}
+
+/* ===== BODY ===== */
+.cart-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.cart-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto auto;
+  gap: .5rem;
+  align-items: center;
+  padding: .5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.9rem;
+}
+
+.cart-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.cart-qty {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+.cart-qty button {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #ccc;
+  background: #f9fafb;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+  line-height: 1;
+  transition: background .2s, transform .1s;
+}
+.cart-qty button:hover {
+  background: #e5e7eb;
+}
+.cart-qty button:active {
+  transform: scale(0.9);
+}
+.cart-qty span {
+  width: 24px;
+  text-align: center;
+}
+
+.cart-price, .cart-line {
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.cart-remove {
+  font-size: 0.75rem;
+  color: #dc2626;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color .2s;
+}
+.cart-remove:hover {
+  color: #b91c1c;
+}
+
+/* ===== FOOTER ===== */
+.cart-footer {
+  border-top: 1px solid #e5e7eb;
+  padding: 1rem;
+}
+.cart-total {
+  margin-bottom: .75rem;
+  font-size: 1rem;
+}
+.checkout {
+  width: 100%;
+  padding: .75rem;
+  background: linear-gradient(90deg, #6366f1, #a855f7);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .3s, transform .1s;
+}
+.checkout:hover {
+  background: linear-gradient(90deg, #4f46e5, #9333ea);
+}
+.checkout:active {
+  transform: scale(0.97);
+}
+.checkout:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+
+
+

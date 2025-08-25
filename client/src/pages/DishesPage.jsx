@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import DishModal from "../components/DishModal";
 import "../styles/DishesPage.css";
-import { useCart } from "../CartProvider";
+import { useCart } from "../components/CartProvider";
 
 const API = (import.meta.env.VITE_API_URL || 'http://localhost:3000/api').replace(/\/$/, '');
 const authHeaders = () => ({ Authorization: `Bearer ${localStorage.getItem("token") || ""}` });

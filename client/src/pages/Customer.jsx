@@ -20,9 +20,9 @@ function Customer(){
                 <div className="main">
                     <Topbar query={q} onChange={setQ} />
                     <div className="customer-header">
-                        <CartButton />           {/* 👈 כאן האייקון + הבדג’ והמגירה */}
+                        <CartButton />           
                     </div>
-                    {/* כאן ירונדרו הדפים הפנימיים (קטגוריות / מנות) */}
+                    
                     <Outlet context={{ query: q }} />
                 </div>
         </div>

@@ -100,7 +100,7 @@ const cartModel = {
       `SELECT oi.id, oi.dish_id, d.name, oi.quantity,
               oi.price AS unit_price,
               (oi.quantity * oi.price) AS line_total,
-              oi.notes
+              oi.note
          FROM order_items oi
          JOIN dishes d ON d.id = oi.dish_id
         WHERE oi.order_id = ?
