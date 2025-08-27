@@ -32,10 +32,10 @@ exports.register = async (req, res) => {
     }
 
     const password_hash = await bcrypt.hash(password, 10);
-    const userId = await UserModel.create({ name, email, password_hash, phone });
+    const userId = await UserModel.create({ name, email, password_hash, phone, role: 'user' });
     const user = await UserModel.findById(userId);
 
-    const token = signToken({ id: user.id, email: user.email });
+    const token = signToken({ id: user.id, email: user.email, role: user.role });
     return res.status(201).json({ user: safeUser(user), token });
   } catch (err) {
     console.error('register error:', err);
@@ -57,8 +57,9 @@ exports.login = async (req, res) => {
     const ok = await bcrypt.compare(password, user.password_hash);
     if (!ok) return res.status(401).json({ error: 'Invalid credentials' });
 
-    const token = signToken({ id: user.id, username: user.username });
+    const token = signToken({ id: user.id, name: user.name, role: user.role });
     return res.json({ user: safeUser(user), token });
+
   } catch (err) {
     console.error('login error:', err);
     return res.status(500).json({ error: 'Failed to login' });

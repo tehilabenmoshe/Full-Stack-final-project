@@ -70,7 +70,7 @@ export default function Profile() {
         headers: { Authorization: `Bearer ${token}` }
       });
       logout();
-      navigate("/register"); // מחזיר לעמוד הרשמה
+      navigate("/register"); // return to register
     } catch (err) {
       setMessage(err.response?.data?.message || "שגיאה במחיקת החשבון");
     }

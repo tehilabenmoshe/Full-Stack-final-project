@@ -44,8 +44,7 @@ async function clearData() {
 async function seedUsers() {
   try {
     const sampleUsers = [
-      { name: 'Tehila Michaeli', email: 't.micha@example.com', phone: '052-1234567' },
-      { name: 'Miryam Amar', email: 'm.amar@example.com', phone: '052-1234567' },
+
       { name: 'John Smith', email: 'john.smith@example.com', phone: '052-1234567' },
       { name: 'Emily Johnson', email: 'emily.johnson@example.com', phone: '050-7654321' },
       { name: 'Michael Brown', email: 'michael.brown@example.com', phone: '054-9876543' },
@@ -82,6 +81,25 @@ async function seedUsers() {
     console.error('Error - adding users', err);
   }
 }
+async function seedAdmins() {
+  const password_hash = await bcrypt.hash('123456', 10); // סיסמה ברירת מחדל
+
+  const users = [
+    { name: 'Tehila Michaeli', email: 't.micha@example.com', phone: '052-1234567', role: 'admin' },
+    { name: 'Miryam Amar', email: 'm.amar@example.com', phone: '052-1234567', role: 'admin' },
+  ];
+
+  for (const u of users) {
+    await pool.query(
+      `INSERT INTO users (name, email, password_hash, phone, role)
+       VALUES (?, ?, ?, ?, ?)`,
+      [u.name, u.email, password_hash, u.phone, u.role]
+    );
+  }
+
+  console.log("✅ Added Tehila Michaeli and Miryam Amar as admins");
+}
+
 
 // add categories data func
 async function seedCategories() {
@@ -150,17 +168,17 @@ async function seedDishes() {
   console.log('Dishes with dummy images added');
 }
 
-// add orders data func (עם הערות per item)
+// add orders data func 
 async function seedOrders() {
   try {
-    // === הזמנה ראשונה ===
+    // order 1
     const [orderResult1] = await pool.query(
       `INSERT INTO orders (user_id, status, total_price) VALUES (?, ?, ?)`,
       [1, 'pending', 122.00] // 2×Pizza + 1×Cola
     );
     const orderId1 = orderResult1.insertId;
 
-    // ⬇️ שמים note לכל שורה
+    // 
     await pool.query(
       `INSERT INTO order_items (order_id, dish_id, quantity, price, note)
        VALUES (?, ?, ?, ?, ?), (?, ?, ?, ?, ?)`,
@@ -172,7 +190,7 @@ async function seedOrders() {
 
     console.log(`order #${orderId1} added`);
 
-    // === הזמנה שנייה ===
+    // order 2
     const [orderResult2] = await pool.query(
       `INSERT INTO orders (user_id, status, total_price) VALUES (?, ?, ?)`,
       [1, 'completed', 80.00] // לדוגמה 2×Pasta
@@ -197,9 +215,10 @@ async function seedOrders() {
 // main add data func
 async function seed() {
   try {
-    await ensureSchema();     // ✅ לפני הכל: לוודא שיש עמודת note
+    await ensureSchema();    
     await clearData();
     await seedUsers();
+    await seedAdmins();
     await seedCategories();
     await seedDishes();
     await seedOrders();

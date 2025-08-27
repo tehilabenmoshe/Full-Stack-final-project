@@ -2,14 +2,15 @@
 const pool = require('../db_connection');
 
 const UserModel = {
-  // יצירת משתמש חדש
-  async create({ name, email, password_hash, phone }) {
-    const [result] = await pool.query(
-      'INSERT INTO users (name, email, password_hash, phone) VALUES (?,?,?,?)',
-      [name, email, password_hash, phone || null]
-    );
-    return result.insertId;
-  },
+  // create new user
+ async create({ name, email, password_hash, phone, role = 'user' }) {
+  const [result] = await pool.query(
+    'INSERT INTO users (name, email, password_hash, phone, role) VALUES (?,?,?,?,?)',
+    [name, email, password_hash, phone || null, role]
+  );
+  return result.insertId;
+}
+,
 
   // מציאת משתמש לפי אימייל
   async findByEmail(email) {
@@ -39,9 +40,9 @@ const UserModel = {
 
   // החזרת כל המשתמשים
   async findAll() {
-    const [rows] = await pool.query(
-      'SELECT id, name, email, phone, created_at FROM users ORDER BY id DESC'
-    );
+  const [rows] = await pool.query(
+  'SELECT id, name, email, phone, role, created_at FROM users ORDER BY id DESC'
+);
     return rows;
   },
 
