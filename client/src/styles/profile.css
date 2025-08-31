@@ -1,149 +1,147 @@
-:root {
-  --bg: #f7f7f8;
-  --card: #fff;
-  --line: #eaeaea;
-  --brand: #ff4d4f;
-  font-family: 'Urbanist', sans-serif;
-}
 
 .profile-container {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 30px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 40px 20px;
+  text-align: left;
   font-family: 'Urbanist', sans-serif;
 }
 
-.profile-container h2 {
+.profile-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  padding: 30px;
+  width: 100%;
+  max-width: 650px;
+}
+
+.profile-card h2 {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #111;
+  margin-bottom: 25px;
+  color: #ff2759;
 }
 
-.user-info {
-  background: #fafafa;
-  padding: 18px 20px;
+
+.section {
+  margin-bottom: 25px;
+  padding: 15px;
+  border: 1px solid #eee;
   border-radius: 12px;
-  border: 1px solid var(--line);
-  margin-bottom: 30px;
-  line-height: 1.6;
+  background: #fafafa;
 }
 
-.user-info p {
-  margin: 6px 0;
-  font-size: 1rem;
+.section h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
   color: #333;
 }
 
 
-h3 {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
-  color: #222;
-  text-align: right;
-}
-
-/*  update pass form */
-form {
-  display: grid;
-  gap: 14px;
-  margin-bottom: 30px;
-}
-
-form input {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: #f7f7f8;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-}
-
-form input:focus {
-  outline: none;
-  border-color: var(--brand);
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(255, 77, 79, 0.2);
-}
-
-/* update password botton*/
-form button {
-  background: var(--brand);
-  color: white;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-form button:hover {
-  background: #e63b3d;
-}
-
-/* כפתור מחיקה */
-.delete-btn {
-  background: #f44336;
-  color: #fff;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: block;
-  margin: 0 auto;
-  transition: background 0.2s ease;
-}
-
-.delete-btn:hover {
-  background: #d7372b;
+.user-info p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #444;
 }
 
 
-.message {
-  margin-top: 16px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--brand);
-  text-align: center;
-}
-
-.profile-container {
-  direction: rtl; 
-  text-align: right; 
-}
-
-.user-info {
-  text-align: right; 
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .order-card {
-  background: #fff;
-  border: 1px solid var(--line);
+  border: 1px solid #ddd;
   border-radius: 10px;
   padding: 12px;
-  margin-bottom: 15px;
-  direction: rtl;
-  text-align: right;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  background: #fff;
+  transition: box-shadow 0.2s ease;
 }
 
-.order-card ul {
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
+.order-card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.order-card li {
-  font-size: 0.95rem;
-  margin-bottom: 4px;
+
+.status {
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.status.pending {
+  color: #856404;
+  background-color: #fff3cd;
+}
+
+.status.completed {
+  color: #155724;
+  background-color: #d4edda;
+}
+
+.status.canceled {
+  color: #721c24;
+  background-color: #f8d7da;
+}
+
+
+form input {
+  width: 80%;
+  margin: 0 auto;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  display: block;
+}
+
+.profile-card .btn {
+  all: unset;
+  display: block;
+  width: 200px;        
+  padding: 10px 16px;
+  margin: 10px auto;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+/* Save button */
+.profile-card .save-btn {
+  background-color: #28a745;
+  color: #fff;
+}
+.profile-card .save-btn:hover {
+  background-color: #218838;
+}
+.profile-card .save-btn:active {
+  transform: scale(0.95);
+}
+
+/* Delete Account button (חדש!) */
+.profile-card .deleteAccount-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+.profile-card .deleteAccount-btn:hover {
+  background-color: #c82333;
+}
+.profile-card .deleteAccount-btn:active {
+  transform: scale(0.95);
+}
+
+.message {
+  margin-top: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: #555;
 }

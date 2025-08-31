@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/CategoryList.css";
-import { useAuth } from "../AuthProvider";   // ✅ כדי לבדוק אם המשתמש אדמין
+import { useAuth } from "../AuthProvider";   
 
 const API = (import.meta.env.VITE_API_URL || 'http://localhost:3000/api').replace(/\/$/, '');
 const authHeaders = () => ({ Authorization: `Bearer ${localStorage.getItem('token') || ''}` });
@@ -13,8 +13,8 @@ export default function CategoryList() {
   const [error, setError] = useState('');
   const [newCatName, setNewCatName] = useState('');
   const [newCatDesc, setNewCatDesc] = useState('');
-  const [newCatImage, setNewCatImage] = useState('');   // ✅ חדש
-  const { user } = useAuth();                           // ✅ המשתמש
+  const [newCatImage, setNewCatImage] = useState('');   
+  const { user } = useAuth();                           
   const navigate = useNavigate();
 
   // get categories
@@ -109,7 +109,7 @@ export default function CategoryList() {
 
             {user?.role === "admin" && (
               <button
-                className="delete-btn"
+                className="category-delete-btn"
                 onClick={(e) => { e.stopPropagation(); handleDeleteCategory(cat.id); }}
               >
                  delete

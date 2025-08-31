@@ -141,7 +141,7 @@ export default function DishesPage() {
             {/* delete botton- admin only*/}
             {user?.role === "admin" && (
               <button
-                className="delete-btn"
+                className="dish-delete-btn"
                 onClick={(e) => { e.stopPropagation(); handleDeleteDish(dish.id); }}
               >
                  delete
