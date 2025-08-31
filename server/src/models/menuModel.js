@@ -2,7 +2,7 @@
 const pool = require('../db_connection');
 
 module.exports = {
-  // --- קריאת קטגוריות ---
+  
   async getCategories() {
     const [rows] = await pool.query(
       'SELECT id, name, description, image_url FROM categories ORDER BY name'
@@ -10,7 +10,7 @@ module.exports = {
     return rows;
   },
 
-  // --- קריאת מנות לפי קטגוריה ---
+  // get dishes by category
   async getItems(categoryId) {
     const [rows] = await pool.query(
       `SELECT 
@@ -29,15 +29,15 @@ module.exports = {
     return rows;
   },
 
-  // --- חיפוש מנות (עובד מול dishes, לא items) ---
+// search dishes by name
   async searchItems(q) {
     const like = `%${q}%`;
     const [rows] = await pool.query(
-      `SELECT id, name, description, price, image_url, category_id
-       FROM dishes
-       WHERE (available = 1 OR available IS NULL)
-         AND (name LIKE ? OR description LIKE ?)
-       ORDER BY name`,
+  `SELECT id, name, description, price, image_url, category_id
+     FROM dishes
+     WHERE (available = 1 OR available IS NULL)
+       AND name LIKE ?
+     ORDER BY name`,
       [like, like]
     );
     return rows;
