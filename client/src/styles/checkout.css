@@ -1,0 +1,240 @@
+/* ====== Checkout Layout ====== */
+.checkout-wrap {
+  margin-top: 0px;               
+  max-width: 980px;
+  margin: 0 auto;
+  font-family: 'Urbanist', sans-serif;
+  color: #0f172a;
+  padding: 0px;
+}
+
+.checkout-wrap h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+  font-family: 'Urbanist', sans-serif;
+  color: #000000;
+}
+
+/* פריסת גריד: טור אחד בסדר הרצוי */
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr;          /* טור יחיד */
+  grid-template-areas:
+    "summary"   /* למעלה: סיכום */
+    "address"   /* מתחת: פרטי משלוח */
+    "payment"   /* מתחת: אמצעי תשלום */
+    "submit";   /* בסוף: כפתור */
+  align-items: start;
+  font-family: 'Urbanist', sans-serif;
+}
+
+/* מיפוי האזורים */
+.summary { grid-area: summary; }
+.address { grid-area: address; }
+.payment { grid-area: payment; }
+.checkout-submit { grid-area: submit; }
+
+/* כרטיסיות */
+.address, .payment, .summary {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(15, 23, 42, .06);
+  padding: 18px;
+  font-family: 'Urbanist', sans-serif;
+}
+
+.address h3, .payment h3, .summary h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+/* ====== Address ====== */
+.address .grid-details {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr; /* שני עמודות לשדות */
+  font-family: 'Urbanist', sans-serif;
+}
+
+.checkout-grid h3 {
+  text-align: left;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  color: #ef4444
+}
+.grid-details input{
+    width: 5px;
+    
+}
+
+.address input,
+.address textarea,
+.payment input,
+.payment textarea {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+  padding: 12px 14px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+  font-family: 'Urbanist', sans-serif;
+}
+
+
+.address input:focus,
+.address textarea:focus,
+.payment input:focus {
+  border-color: #7c3aed;                    /* סגול עדין */
+  box-shadow: 0 0 0 3px rgba(124,58,237,.15);
+  background: #fff;
+}
+
+.address .grid input,
+.address .grid textarea,
+.grid-details input,
+.grid-details select {
+  width: 95%;
+  min-width: 0;
+  box-sizing: border-box;
+  
+}
+
+.address textarea{
+    margin-top: 20px;
+    width: 95%;
+    min-height: 64px; resize: vertical;
+}
+
+/* ====== Payment ====== */
+.payment label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-weight: 600;
+  margin: 6px 0 4px;
+}
+
+.payment input[type="radio"] {
+  accent-color: #7c3aed;
+  width: 18px;
+  height: 18px;
+}
+
+.payment .card-form {
+  display: grid;
+
+  grid-template-columns: 2fr 1fr 1fr; /* מספר כרטיס | תוקף | CVC */
+  margin-top: 8px;
+  width: 100%;
+}
+
+.card-form {
+  display: grid;
+  gap: 10px;
+  grid-template-columns:
+    minmax(220px, 1.6fr)  /* card number */
+    minmax(120px, 0.8fr)  /* MM/YY */
+    minmax(100px, 0.8fr); /* CVC */
+}
+
+.card-form > * {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* בינוני: המספר תופס שורה מלאה, השניים ליד-ליד */
+@media (max-width: 880px) {
+  .card-form { grid-template-columns: 1fr 1fr; }
+  .card-form .cc-number { grid-column: 1 / -1; }
+}
+
+/* קטן מאוד: הכל טור אחד */
+@media (max-width: 520px) {
+  .card-form { grid-template-columns: 1fr; }
+}
+
+
+/* ====== Summary ====== */
+.summary ul {
+  margin: 0;
+  font-family: 'Urbanist', sans-serif;
+  
+}
+.summary li { margin-bottom: 8px; }
+.summary h4 {
+  margin-left: 20px;
+  margin-top: 18px;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+/* ====== Submit Button ====== */
+.checkout-submit {
+  /* אין צורך יותר ב-grid-column לרוחב כל הגריד כי יש טור אחד */
+  margin-top: 8px;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-weight: 700;
+  font-size: 1rem;
+  background: linear-gradient(90deg,#ef4444,#f97316);  /* אדום→כתום */
+  color: #fff;
+  cursor: pointer;
+  transition: transform .06s ease, filter .2s ease;
+}
+.checkout-submit:hover { filter: brightness(1.05); }
+.checkout-submit:active { transform: translateY(1px) scale(.99); }
+.checkout-submit:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 900px) {
+  .address .grid { grid-template-columns: 1fr; } /* שדות הכתובת בטור אחד במובייל */
+}
+
+
+/* הטופס של הכרטיס תמיד שומר מקום, רק “נעלם” ויזואלית כשלא נבחר */
+.card-form {
+  transition: opacity .2s ease;
+}
+.card-form.ghost {
+  visibility: hidden;     /* שומר מקום אך לא נראה */
+  opacity: 0;
+  pointer-events: none;   /* לא ניתן ללחיצה */
+}
+.card-form.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* הערות Bit/איסוף – לא חייבות לשמור מקום */
+.pay-note.hidden { display: none; }
+.pay-note.show   { display: block; margin: 6px 0 0; font-size: 14px; color: #475569; }
+
+/* פריסת שדות הכרטיס – שלא יתנגשו */
+.card-form {
+  display: grid;
+  gap: 10px;
+  grid-template-columns:
+    minmax(220px, 1.6fr)
+    minmax(120px, 0.8fr)
+    minmax(100px, 0.8fr);
+}
+.card-form > * { min-width: 0; width: 100%; box-sizing: border-box; }
+@media (max-width: 880px) {
+  .card-form { grid-template-columns: 1fr 1fr; }
+  .card-form .cc-number { grid-column: 1 / -1; }
+}
+@media (max-width: 520px) {
+  .card-form { grid-template-columns: 1fr; }
+}
+

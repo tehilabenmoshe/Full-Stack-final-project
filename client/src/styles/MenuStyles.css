@@ -212,7 +212,7 @@
 .checkout {
   width: 100%;
   padding: .75rem;
-  background: linear-gradient(90deg, #6366f1, #a855f7);
+  background:  linear-gradient(to right, #ff3463,  #ffb443); 
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -222,7 +222,7 @@
   transition: background .3s, transform .1s;
 }
 .checkout:hover {
-  background: linear-gradient(90deg, #4f46e5, #9333ea);
+  background:  linear-gradient(to right, #9d1f3c,  #875e21); 
 }
 .checkout:active {
   transform: scale(0.97);

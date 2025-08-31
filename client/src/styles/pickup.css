@@ -1,0 +1,104 @@
+.pickup-wrap{
+  max-width: 960px;
+  margin: 24px auto;
+  color: var(--text);
+  font-family: 'Urbanist', sans-serif;
+}
+
+.pickup-title{
+  margin: 0 0 6px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: .2px;
+  font-family: 'Urbanist', sans-serif;
+  color:#ff3056
+}
+
+.pickup-sub{
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 15px;
+ font-family: 'Urbanist', sans-serif;
+}
+
+.pickup-row{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.pickup-input{
+  flex: 1;
+  padding: 12px 14px;
+  background: var(--panel);
+  border: 2px solid #575757;
+  border-radius: 8px;
+  color: var(--text);
+  outline: none;
+  transition: border .15s ease, box-shadow .15s ease;
+  font-family: 'Urbanist', sans-serif;
+}
+.pickup-input::placeholder{ color:#6b7280; }
+.pickup-input:focus{
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,.2);
+}
+
+.pickup-btn{
+  padding: 12px 18px;
+  font-family: 'Urbanist', sans-serif;
+  border: none;
+  border-radius: 10px;
+  background:#ffc130;
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .05s ease, filter .15s ease, opacity .2s ease;
+}
+.pickup-btn:hover{ filter: brightness(1.05); }
+.pickup-btn:active{ transform: translateY(1px); }
+.pickup-btn:disabled{
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.pickup-alert{
+  
+  
+  color: #ff3049;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+}
+
+.pickup-card{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  align-items: center;
+  color:#000000;
+
+  background-color: #eaeaea;
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+}
+
+.pickup-dot{ opacity:.5; }
+
+.pickup-map{
+  height: 520px;      /* אפשר לשנות לגובה רצוי */
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid #232530;
+  box-shadow: var(--shadow);
+}
+
+/* מובייל */
+@media (max-width: 640px){
+  .pickup-title{ font-size: 24px; }
+  .pickup-row{ flex-direction: column; }
+  .pickup-btn{ width: 100%; }
+}

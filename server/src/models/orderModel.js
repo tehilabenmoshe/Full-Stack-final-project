@@ -1,19 +1,67 @@
-// const pool = require('../db_connection')
-// const OrderModel = {
-//   // שליפת כל ההזמנות של משתמש לפי user_id
-//   async findByUserId(userId) {
-//     const [rows] = await pool.query(
-//       "SELECT id, order_date, status, total_price FROM orders WHERE user_id = ? ORDER BY order_date DESC",
-//       [userId]
-//     );
-//     return rows;
-//   }
-  
-// };
-
-// module.exports = OrderModel;
-
+// server/src/models/orderModel.js
 const pool = require('../db_connection');
+
+// ─────────────  Getters  ─────────────
+async function getPendingOrderForUser(conn, userId) {
+  const [[row]] = await conn.query(
+    `SELECT id FROM orders WHERE user_id=? AND status='pending' ORDER BY id DESC LIMIT 1`,
+    [userId]
+  );
+  return row || null;
+}
+
+async function getOrderByIdForUser(conn, orderId, userId) {
+  const [[row]] = await conn.query(
+    `SELECT id, user_id, status, total_price, payment_method, payment_ref
+     FROM orders
+     WHERE id=? AND user_id=?`,
+    [orderId, userId]
+  );
+  return row || null;
+}
+
+async function getOrderTotal(conn, orderId) {
+  const [[row]] = await conn.query(
+    `SELECT COALESCE(SUM(quantity*price),0) AS total
+     FROM order_items WHERE order_id=?`,
+    [orderId]
+  );
+  return Number(row?.total || 0);
+}
+
+// ─────────────  Mutations  ─────────────
+async function updateOrderMeta(conn, orderId, { total, address, paymentMethod }) {
+  return conn.query(
+    `UPDATE orders
+     SET total_price=?, delivery_address=?, payment_method=?
+     WHERE id=?`,
+    [total, address ? JSON.stringify(address) : null, paymentMethod || null, orderId]
+  );
+}
+
+async function markOrderPaid(conn, orderId, paymentRef) {
+  return conn.query(
+    `UPDATE orders SET status='paid', payment_ref=? WHERE id=?`,
+    [paymentRef, orderId]
+  );
+}
+
+async function setPaymentRef(conn, orderId, paymentRef) {
+  return conn.query(
+    `UPDATE orders SET payment_ref=? WHERE id=?`,
+    [paymentRef, orderId]
+  );
+}
+
+module.exports = {
+  pool, // לשימוש לפתיחת conn ב־route
+  getPendingOrderForUser,
+  getOrderByIdForUser,
+  getOrderTotal,
+  updateOrderMeta,
+  markOrderPaid,
+  setPaymentRef,
+};
 
 const OrderModel = {
   // שליפת כל ההזמנות של משתמש כולל הפריטים בכל הזמנה

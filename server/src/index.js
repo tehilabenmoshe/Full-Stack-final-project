@@ -16,6 +16,8 @@ app.use('/api/menu', require('./routes/menu.routes'));
 app.use('/api/cart', require('./routes/cart.routes'));
 //app.use('/api/cart', require('./routes/cart'));
 app.use('/api/orders', require('./routes/order.routes'));
+app.use('/api/checkout', require('./routes/checkout.routes'));
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Click2Eat API running on http://localhost:${PORT}`));

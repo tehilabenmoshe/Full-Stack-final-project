@@ -1,7 +1,15 @@
 import { useCart } from "./CartProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function CartDrawer({ onClose }) {
   const { items, total, loading, updateQty, removeItem } = useCart();
+  const navigate = useNavigate();
+
+  const goCheckout = () => {
+    if (!items.length) return;
+    onClose?.();
+    navigate("/customer/checkout");
+  };
 
   return (
     <div className="cart-backdrop" onClick={onClose}>
@@ -32,7 +40,7 @@ export default function CartDrawer({ onClose }) {
 
         <footer className="cart-footer">
           <div className="cart-total"><strong>Total: ₪{Number(total).toFixed(2)}</strong></div>
-          <button className="checkout" disabled={!items.length}>Checkout</button>
+          <button className="checkout" disabled={!items.length} onClick={goCheckout}>Checkout</button>
         </footer>
       </aside>
     </div>

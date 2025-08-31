@@ -1,33 +1,29 @@
 :root {
-    --bg:#f7f7f8;
-    --card:#fff;
-    --line:#eaeaea;
-    --brand:#ff4d4f; 
-    font-family: 'Urbanist', sans-serif;
+  --bg:#f7f7f8;
+  --card:#fff;
+  --line:#eaeaea; 
+  font-family: 'Urbanist', sans-serif;
 }
 
 
 
 body{
-    margin:0;
-    background:var(--bg);
-    font-family:system-ui,Segoe UI,Roboto,Arial
+  margin:0;
+  background:var(--bg);
+  font-family:system-ui,Segoe UI,Roboto,Arial
 }
 
 .layout{
-    display:grid;
-    grid-template-columns: 240px 1fr;
-    min-height:100vh
+  display:grid;
+  grid-template-columns: 240px 1fr;
+  min-height:100vh
 }
 
-.side{
-    
-    border-inline-end:1px solid var(--line);
-    padding: 30px;
-    border: none;
-    font-family: 'Urbanist', sans-serif;
-
-  
+.side{ 
+  border-inline-end:1px solid var(--line);
+  padding: 30px;
+  border: none;
+  font-family: 'Urbanist', sans-serif;  
 }
 
 .logo {
@@ -44,7 +40,7 @@ body{
 }
 .snav{display:grid; gap:8px}
 .snav a{padding:8px 10px; border-radius:8px; text-decoration:none; color:#111}
-.snav a.active{background:var(--brand); color:#fff}
+
 
 .main{
   display:flex; 
@@ -54,17 +50,41 @@ body{
 }
 
 
-
-
-
-
-.grid{display:grid; gap:16px; grid-template-columns: repeat(auto-fill, minmax(220px,1fr));}
-.card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; text-decoration:none; color:inherit}
-.card-emoji{font-size:28px}
-.card-title{font-weight:700; margin-top:6px}
-.card-desc{opacity:.75; font-size:.95rem}
-.price{margin-top:6px; font-weight:700}
-.btn{margin-top:10px; background:var(--brand); color:#fff; border:none; padding:8px 12px; border-radius:10px; cursor:pointer}
+.grid{
+  display:grid; 
+  gap:16px; 
+  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+}
+.card{
+  background:var(--card); 
+  border:1px solid var(--line); 
+  border-radius:14px; 
+  text-decoration:none; 
+  color:inherit
+}
+.card-emoji{
+  font-size:28px
+}
+.card-title{
+  font-weight:700; 
+  margin-top:6px
+}
+.card-desc{
+  opacity:.75; 
+  font-size:.95rem
+}
+.price{
+  margin-top:6px; 
+  font-weight:700
+}
+.btn{
+  margin-top:10px; 
+  background:var(--brand); 
+  color:#fff; border:none; 
+  padding:8px 12px; 
+  border-radius:10px; 
+  cursor:pointer
+}
 
 @media (max-width: 900px){
   .layout{grid-template-columns: 1fr}
@@ -152,7 +172,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:flex-end; /* האייקון בצד ימין */
-  padding:8px 8px 12px;
+ 
 }
 
 

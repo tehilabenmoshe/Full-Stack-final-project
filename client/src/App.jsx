@@ -8,6 +8,9 @@ import Customer from './pages/Customer'
 import DishesPage from './pages/DishesPage'
 import CategoryList from './components/CategoryList'
 import Profile from './components/Profile';
+import Checkout from './pages/Checkout';
+import PickupPage from './pages/PickupPage';
+
 export default function App(){
   return (
     <>
@@ -23,6 +26,8 @@ export default function App(){
             <Route index element={<CategoryList />} />                      {/* /customer */}
             <Route path="categories/:id" element={<DishesPage />} />        {/* /customer/categories/:id */}
             <Route path="/customer/profile" element={<Profile />} />
+            <Route path="checkout" element={<Checkout />} /> 
+            <Route path="pickup" element={<PickupPage />} />
           </Route>
 
           
