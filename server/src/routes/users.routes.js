@@ -16,7 +16,7 @@ router.post('/login', usersCtrl.login);                // או: validate(loginSc
 // --- Protected (דורש JWT) ---
 router.get('/me', usersCtrl.requireAuth, usersCtrl.me);
 router.get('/', usersCtrl.requireAuth,isAdmin, usersCtrl.list);
-router.get('/:id', usersCtrl.requireAuth, isAdmin,usersCtrl.getById);
+router.get('/:id', usersCtrl.requireAuth,usersCtrl.getById);
 // אם יש Joi לעדכון: validate(updateSchema)
 router.put('/:id', usersCtrl.requireAuth, usersCtrl.update);
 router.delete('/:id', usersCtrl.requireAuth,isAdmin, usersCtrl.remove);
