@@ -110,7 +110,7 @@ useEffect(() => {
               </div>
             ))
           ) : (
-            q && <p>לא נמצאו מנות.</p>
+            q && <p>no dishes found</p>
           )}
         </div>
 

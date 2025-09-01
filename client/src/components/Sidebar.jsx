@@ -15,7 +15,7 @@ export default function Sidebar(){
       <nav className="snav">
         <NavLink to="/customer">Home</NavLink>              {/* ✅ חוזר לעמוד הראשי */}
         <NavLink to="/customer/profile">Profile</NavLink>   {/* ✅ נשאר לפרופיל */}
-        <NavLink to="/customer/cart">My Cart 🛒</NavLink>
+        {/* <NavLink to="/customer/cart">My Cart 🛒</NavLink> */}
         <NavLink to="/customer/help">Help</NavLink>
       </nav>
     </aside>
