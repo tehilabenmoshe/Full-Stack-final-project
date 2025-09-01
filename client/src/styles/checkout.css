@@ -41,6 +41,7 @@
   border-radius: 14px;
   box-shadow: 0 8px 28px rgba(15, 23, 42, .06);
   padding: 18px;
+  margin-top: 10px;
   font-family: 'Urbanist', sans-serif;
 }
 
@@ -111,27 +112,57 @@
 }
 
 /* ====== Payment ====== */
-.payment label {
-  display: flex;
-  gap: 8px;
+
+/* פריסת אזור התשלום: כותרת בשורה לבד, אחריה הכול בטור/שורות */
+.payment{
+  display: grid;
+  grid-template-columns: auto 1fr;  /* עמודה צרה לרדיו+טקסט, עמודה רחבה לתוכן */
+  column-gap: 12px;
+  row-gap: 12px;
   align-items: center;
-  font-weight: 600;
-  margin: 6px 0 4px;
+  text-align: left;
+  direction: ltr;                   /* הרדיו משמאל לטקסט */
 }
 
-.payment input[type="radio"] {
-  accent-color: #7c3aed;
+/* הכותרת תופסת שורה מלאה לעצמה (כדי ששום דבר לא יעמוד לצידה) */
+.payment > h3{
+  grid-column: 1 / -1;
+  margin-bottom: 4px;
+}
+
+/* כל אפשרות תשלום – בשורה, מיושרת לשמאל */
+.payment > label{
+  grid-column: 1 / 2;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+/* טופס הכרטיס והערות – יתפרשו על שני העמודות ויהיו תמיד גלויים */
+.payment .card-form,
+.payment .pay-note{
+  grid-column: 1 / -1;
+}
+
+/* אם נשארו אצלך מחלקות ghost/show – ננטרל הסתרה */
+.payment .card-form,
+.payment .card-form.ghost{
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* מראה עקבי לרדיו */
+.payment input[type="radio"]{
   width: 18px;
   height: 18px;
+  margin: 0;
 }
 
-.payment .card-form {
-  display: grid;
 
-  grid-template-columns: 2fr 1fr 1fr; /* מספר כרטיס | תוקף | CVC */
-  margin-top: 8px;
-  width: 100%;
-}
+
 
 .card-form {
   display: grid;
@@ -176,17 +207,18 @@
 
 /* ====== Submit Button ====== */
 .checkout-submit {
-  /* אין צורך יותר ב-grid-column לרוחב כל הגריד כי יש טור אחד */
   margin-top: 8px;
   border: none;
   border-radius: 12px;
-  padding: 14px 18px;
+  padding: 10px 18px;
   font-weight: 700;
   font-size: 1rem;
   background: linear-gradient(90deg,#ef4444,#f97316);  /* אדום→כתום */
   color: #fff;
   cursor: pointer;
   transition: transform .06s ease, filter .2s ease;
+  margin-bottom: 80px;
+  font-family: 'Urbanist', sans-serif; 
 }
 .checkout-submit:hover { filter: brightness(1.05); }
 .checkout-submit:active { transform: translateY(1px) scale(.99); }

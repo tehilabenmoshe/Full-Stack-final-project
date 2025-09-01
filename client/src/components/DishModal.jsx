@@ -104,9 +104,9 @@ export default function DishModal({ dish, onClose, onAdd, fetchAddons }) {
         </div>
 
         <div className="dm-footer">
-          <div className="dm-total">
-            <div>Unit: ₪{unit.toFixed(2)}</div>
-            <div><strong>Total: ₪{total.toFixed(2)}</strong></div>
+          <div >
+            <div className="dm-unit">Unit: ₪{unit.toFixed(2)}</div>
+            <div className="dm-total"><strong>Total: ₪{total.toFixed(2)}</strong></div>
           </div>
           <button className="dm-add" onClick={add}>
             Add to cart

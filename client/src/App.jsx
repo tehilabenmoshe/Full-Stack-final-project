@@ -10,6 +10,8 @@ import CategoryList from './components/CategoryList'
 import Profile from './components/Profile';
 import Checkout from './pages/Checkout';
 import PickupPage from './pages/PickupPage';
+import OrderSummary from "./pages/OrderSummary";
+
 
 export default function App(){
   return (
@@ -28,6 +30,7 @@ export default function App(){
             <Route path="/customer/profile" element={<Profile />} />
             <Route path="checkout" element={<Checkout />} /> 
             <Route path="pickup" element={<PickupPage />} />
+            <Route path="order-summary" element={<OrderSummary />} />
           </Route>
 
           

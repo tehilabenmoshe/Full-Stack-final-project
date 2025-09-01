@@ -54,6 +54,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: transform .05s ease, filter .15s ease, opacity .2s ease;
+  font-family: 'Urbanist', sans-serif;
 }
 .pickup-btn:hover{ filter: brightness(1.05); }
 .pickup-btn:active{ transform: translateY(1px); }
@@ -88,12 +89,27 @@
 .pickup-dot{ opacity:.5; }
 
 .pickup-map{
-  height: 520px;      /* אפשר לשנות לגובה רצוי */
+  height: 300px;      /* אפשר לשנות לגובה רצוי */
   width: 100%;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid #232530;
   box-shadow: var(--shadow);
+}
+
+.pickup-summary-btn{
+    margin-top: 20px;
+    padding: 10px 14px;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  background:#ff3030;
+  color: rgb(255, 252, 252);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .05s ease, filter .15s ease, opacity .2s ease;
+  font-family: 'Urbanist', sans-serif;
 }
 
 /* מובייל */

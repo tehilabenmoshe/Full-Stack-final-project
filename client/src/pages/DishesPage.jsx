@@ -4,7 +4,8 @@ import axios from "axios";
 import DishModal from "../components/DishModal";
 import "../styles/DishesPage.css";
 import { useCart } from "../components/CartProvider";
-import { useAuth } from "../AuthProvider";   // ✅ נשתמש בקונטקסט
+import { useAuth } from "../AuthProvider";   
+import { ADDONS } from "../data/addons";
 
 const API = (import.meta.env.VITE_API_URL || 'http://localhost:3000/api').replace(/\/$/, '');
 const authHeaders = () => ({ Authorization: `Bearer ${localStorage.getItem("token") || ""}` });
@@ -14,6 +15,7 @@ export default function DishesPage() {
   const [dishes, setDishes] = useState([]);
   const [activeDish, setActiveDish] = useState(null);
   const [error, setError] = useState('');
+  const [modalDish, setModalDish] = useState(null);
 
   // addDish dields
   const [newDishName, setNewDishName] = useState('');
@@ -40,6 +42,19 @@ export default function DishesPage() {
         setDishes([]);
       });
   }, [id]);
+
+
+  async function fetchAddons(dishId) {
+    const dish = dishes.find(d => d.id === dishId);
+    const key =
+      (dish?.category_name || dish?.category || dish?.name || "")
+        .toLowerCase();
+
+    if (key.includes("pizza"))   return ADDONS.pizza;
+    if (key.includes("shawarma")) return ADDONS.shawarma;
+
+    return []; 
+  }
 
   // add dish func
   async function handleAddDish() {
@@ -155,7 +170,8 @@ export default function DishesPage() {
         <DishModal
           dish={activeDish}
           onClose={() => setActiveDish(null)}
-          onAdd={handleAddToCart}
+          onAdd={(payload) => { handleAddToCart(payload); setModalDish(null); }}
+          fetchAddons={fetchAddons}  
         />
       )}
     </div>

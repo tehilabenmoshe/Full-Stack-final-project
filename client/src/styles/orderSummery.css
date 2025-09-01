@@ -1,0 +1,40 @@
+.summary-page-wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Urbanist', sans-serif;
+}
+
+.summary-title { 
+    margin: 0 0 10px; 
+    font-weight: 800; 
+    color:#ed3a3a;
+
+}
+
+.summary-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 24px 60px rgba(15,23,42,.08);
+}
+
+.summary-rows .row {
+  display:flex; justify-content: space-between; gap: 18px;
+  padding: 6px 0; border-bottom: 1px dashed #e5e7eb;
+  margin-bottom: 10px;
+}
+.summary-rows .row:last-child { border-bottom: 0; }
+
+.summary-items { margin-top: 18px; }
+.summary-items h4 { margin: 0 0 6px; font-size: 1.05rem; font-weight: 800; }
+.summary-items ul { margin: 0; padding: 0 18px; max-height: 220px; overflow: auto; }
+.summary-items li { margin: 4px 0; }
+.summary-items .total { margin-top: 18px; font-weight: 800; }
+
+.summary-thanks { margin: 12px 0 0; color:#475569; }
+
+.summary-actions { font-family: 'Urbanist', sans-serif;
+margin-top: 12px; display:flex; gap:8px; justify-content: flex-end; }
+.btn { border: 0; border-radius: 10px; padding: 10px 14px; cursor: pointer; background: #e5e7eb; font-weight: 700; }
+.btn.primary { font-family: 'Urbanist', sans-serif; background: #ed3a3a; color: #fff; }

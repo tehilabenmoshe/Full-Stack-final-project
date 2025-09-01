@@ -135,10 +135,8 @@ export default function Checkout() {
           </label>
 
           {/* card-form תמיד בדום – שומר מקום. כשלא נבחר: ghost */}
-          <div
-            className={`card-form ${method === "card" ? "show" : "ghost"}`}
-            aria-hidden={method !== "card"}
-          >
+          <div className="card-form">   {/* תמיד גלוי */}
+
             <input
               className="cc-number"
               placeholder="card number"
@@ -171,7 +169,7 @@ export default function Checkout() {
             Bit
           </label>
           <p className={`pay-note ${method === "bit" ? "show" : "hidden"}`}>
-            לאחר אישור תופני למסך תשלום של Bit / תקבלי קישור/QR לתשלום.
+            After confirmation, you will be directed to the Bit payment screen / you will receive a link/QR for payment.
           </p>
 
           {/* איסוף עצמי + תשלום במקום */}
@@ -183,10 +181,10 @@ export default function Checkout() {
               checked={method === "pickup_cash"}
               onChange={(e) => setMethod(e.target.value)}
             />
-            איסוף עצמי – תשלום במקום
+            Self-pickup - payment on site
           </label>
           <p className={`pay-note ${method === "pickup_cash" ? "show" : "hidden"}`}>
-            אין צורך למלא פרטי כרטיס. התשלום יתבצע בקופה בעת האיסוף.
+            There is no need to fill out card details. Payment will be made at the cash register upon collection.
           </p>
         </section>
 
@@ -204,7 +202,7 @@ export default function Checkout() {
         </section>
 
         <button type="submit" disabled={disabled} className="checkout-submit">
-          Continue
+          Cheackout Now
         </button>
       </form>
     </div>
