@@ -28,6 +28,23 @@ module.exports = {
     );
     return rows;
   },
+    // get all dishes (ללא סינון קטגוריה)
+  async getAllItems() {
+    const [rows] = await pool.query(
+      `SELECT 
+         id,
+         category_id,
+         name,
+         description,
+         price,
+         image_url,
+         available,
+         created_at
+       FROM dishes`
+    );
+    return rows;
+  },
+
 
 // search dishes by name
   async searchItems(q) {

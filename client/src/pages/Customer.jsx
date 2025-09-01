@@ -14,29 +14,41 @@ function Customer() {
   const { load } = useCart();  // 
 
   // 
-  useEffect(() => {
-    async function fetchDishes() {
-      try {
-        const url = q
-          ? `http://localhost:3000/api/menu/search?q=${encodeURIComponent(q)}`
-          : `http://localhost:3000/api/menu/items`;
-
-        const res = await fetch(url, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
-          },
-        });
-
-        if (!res.ok) throw new Error("Failed to fetch dishes");
-        const data = await res.json();
-        setDishes(data);
-      } catch (err) {
-        console.error(err);
+useEffect(() => {
+  async function fetchDishes() {
+    try {
+      // אם אין חיפוש – אל תציג כלום
+      if (!q) {
         setDishes([]);
+        return;
       }
+
+      // אם יש חיפוש – פנה ל־API של search
+      const url = `http://localhost:3000/api/menu/search?q=${encodeURIComponent(q)}`;
+      const res = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+        },
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Failed to fetch dishes: ${errorText}`);
+      }
+
+      const data = await res.json();
+      setDishes(data);
+    } catch (err) {
+      console.error("שגיאה בטעינת מנות:", err);
+      setDishes([]);
     }
-    fetchDishes();
-  }, [q]);
+  }
+
+  fetchDishes();
+}, [q]);
+
+
 
   // add dish to cart from search
   async function handleAddToCart(dish) {

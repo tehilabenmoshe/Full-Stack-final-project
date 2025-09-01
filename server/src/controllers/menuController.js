@@ -11,17 +11,37 @@ exports.getCategories = async (_req, res) => {
   }
 };
 
+// exports.getItems = async (req, res) => {
+//   try {
+//     const { categoryId } = req.query;
+//     if (!categoryId) return res.status(400).json({ error: 'categoryId is required' });
+//     const items = await MenuModel.getItems(Number(categoryId));
+//     res.json(items);
+//   } catch (e) {
+//     console.error('getItems error:', e);
+//     res.status(500).json({ error: 'Failed to load items' });
+//   }
+// };
 exports.getItems = async (req, res) => {
   try {
     const { categoryId } = req.query;
-    if (!categoryId) return res.status(400).json({ error: 'categoryId is required' });
-    const items = await MenuModel.getItems(Number(categoryId));
+    let items;
+
+    if (categoryId) {
+      // אם יש categoryId -> נביא מנות רק מהקטגוריה הזו
+      items = await MenuModel.getItems(Number(categoryId));
+    } else {
+      // אם אין categoryId -> נביא את כל המנות
+      items = await MenuModel.getAllItems();
+    }
+
     res.json(items);
   } catch (e) {
     console.error('getItems error:', e);
     res.status(500).json({ error: 'Failed to load items' });
   }
 };
+
 
 exports.search = async (req, res) => {
   try {
