@@ -1,44 +1,44 @@
-.page-container{
-  padding:0;
+.page-container {
+  padding: 0;
 }
-.register-page {
+
+.register-page,
+.register-layout {
   display: flex;
   min-height: 100vh;
   font-family: 'Urbanist', sans-serif;
 }
 
+/* צד שמאל (תמונה + רקע) */
 .register-left {
-  flex: 1.75;
-  background: linear-gradient(to right, #f9e8c6,  #ffe3dc); 
-  padding-top: 80px;
-  padding-bottom: 80px;
-  padding-left: 150px;
+  flex: 1.5;
+  background: linear-gradient(to right, #f9e8c6, #ffe3dc); 
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width:fit-content;
-  
-  
-}
-
-.register-left h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
-  color: #ffffff;
   align-items: center;
-  margin-left: 140px;
+  justify-content: center;
+  padding: 40px;
 }
 
-.register-left p {
-  font-size: 20px;
-  color: #2e2e2e;
-  max-width: 500px;
+.picture img {
+  width: 350px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
+.logo2 img {
+  width: 250px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 30px;
+}
+
+/* צד ימין (טופס) */
 .register-right {
   flex: 1;
   background-color: white;
-  padding: 80px 60px;
+  padding: 60px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,7 +73,7 @@
 }
 
 .register-form button {
-  background: linear-gradient(to right, #ff3463,  #ffb443); 
+  background: linear-gradient(to right, #ff3463, #ffb443); 
   color: white;
   border: none;
   border-radius: 25px;
@@ -105,32 +105,72 @@
   text-align: center;
 }
 
+/* ===== רספונסיביות ===== */
 
-.picture {
+/* טאבלט */
+@media (max-width: 768px) {
+  .register-layout {
+    flex-direction: column; /* תמונה למעלה, טופס מתחת */
+  }
+
+  .register-left {
+    padding: 20px;
+  }
+
+  .picture img {
+    width: 200px;
+  }
+
+  .logo2 img {
+    width: 180px;
+  }
+
+  .register-right {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+/* מובייל קטן */
+@media (max-width: 480px) {
+  .register-left {
+    padding: 10px;
+  }
+
+  .picture img {
+    width: 120px; /* להקטין את התמונה במקום להסתיר */
+  }
+
+  .logo2 img {
+    width: 140px;
+  }
+
+  .register-right {
+    padding: 15px;
+  }
+
+  .register-form input,
+  .register-form button {
+    width: 100%;
+  }
+}
+/* מסכים קטנים – הקטנת תיבות */
+@media (max-width: 480px) {
+  .register-form input {
+    padding: 8px 12px;   /* פחות גובה ורוחב פנימי */
+    font-size: 14px;     /* טקסט קטן יותר */
+  }
+
+  .register-form button {
+    padding: 10px;       /* כפתור קטן יותר */
+    font-size: 14px;
+  }
+}
+.register-form {
   display: flex;
-  align-items: center;
-  gap: 0px; /* רווח קטן בין הטקסט לתמונה */
-  margin-bottom: 10px;
-  margin-left: 100px;
-
-}
-
-.picture img {
-  width: 450px;   /* גודל רוחב */
-  height: 450px;  /* גובה */
-  object-fit: contain; /* שהתמונה לא תתעוות */
-}
-
-.logo2 {
-  display: flex;
-  align-items: center;
-  margin-bottom: 50px;
-  margin-left: 150px;
-}
-
-.logo2 img {
-  width: 350px;
-  height: 80px;  /* גובה */
-  object-fit: contain; /* שהתמונה לא תתעוות */
-
+  flex-direction: column;
+  width: 100%;
+  max-width: 320px;   /* היה 350px - צמצמתי מעט */
+  margin: 0 auto;     /* ממורכז באמצע */
+  padding: 0 10px;    /* ריווח מהצדדים */
 }

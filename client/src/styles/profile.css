@@ -143,3 +143,58 @@ form input {
   font-weight: bold;
   color: #555;
 }
+
+/* ===== רספונסיביות לעמוד פרופיל ===== */
+
+/* טאבלט (עד 1024px) */
+@media (max-width: 1024px) {
+  .profile-container {
+    padding: 20px;
+  }
+
+  .profile-card {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .profile-card h2 {
+    font-size: 26px;
+    text-align: center;
+  }
+}
+
+/* מובייל (עד 768px) */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 15px;
+  }
+
+  .profile-card {
+    padding: 15px;
+  }
+
+  .profile-card h2 {
+    font-size: 22px;
+  }
+
+  .profile-info,
+  .profile-actions {
+    font-size: 14px;
+  }
+
+  .profile-actions button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* מובייל קטן (עד 480px) */
+@media (max-width: 480px) {
+  .profile-card h2 {
+    font-size: 20px;
+  }
+
+  .profile-info {
+    font-size: 13px;
+  }
+}

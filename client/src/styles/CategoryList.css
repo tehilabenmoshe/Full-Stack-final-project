@@ -49,19 +49,23 @@
 
 .add-category {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;   /* מציב את השדות אחד מתחת לשני */
   gap: 10px;
   margin: 20px 0 40px;
   padding: 15px;
   background: #fdf6f0;
   border: 2px dashed #ffb347;
   border-radius: 16px;
-  align-items: center;
+  align-items: stretch;     /* גורם לכל הילדים להיות 100% */
+}
+
+.add-category input,
+.add-category button {
+  width: 100%;              /* כל השדות והכפתור באותו רוחב */
+  box-sizing: border-box;   /* לוקח בחשבון padding */
 }
 
 .add-category input {
-  flex: 1;
-  min-width: 200px;
   padding: 10px 14px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -111,4 +115,54 @@
 
 .category-delete-btn:active {
   transform: scale(0.95);
+}
+
+
+/* ===== רספונסיביות ===== */
+
+/* טאבלט (עד 1024px) */
+@media (max-width: 1024px) {
+  .category-menu {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .category-title {
+    font-size: 32px;
+    margin-right: 0;
+  }
+}
+
+/* מובייל (עד 768px) */
+@media (max-width: 768px) {
+  .categories-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+  }
+
+  .category-title {
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+
+  .category-card {
+    padding: 10px;
+  }
+
+  .category-image {
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+/* מובייל קטן (עד 480px) */
+@media (max-width: 480px) {
+  .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .category-title {
+    font-size: 22px;
+  }
 }

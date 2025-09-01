@@ -118,3 +118,54 @@
   .pickup-row{ flex-direction: column; }
   .pickup-btn{ width: 100%; }
 }
+/* ===== רספונסיביות לעמוד Pickup ===== */
+
+/* טאבלט (עד 1024px) */
+@media (max-width: 1024px) {
+  .pickup-container {
+    padding: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .pickup-container h2 {
+    font-size: 26px;
+    text-align: center;
+  }
+}
+
+/* מובייל (עד 768px) */
+@media (max-width: 768px) {
+  .pickup-container {
+    padding: 15px;
+  }
+
+  .pickup-container h2 {
+    font-size: 22px;
+  }
+
+  .pickup-details {
+    font-size: 14px;
+  }
+
+  .pickup-actions button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* מובייל קטן (עד 480px) */
+@media (max-width: 480px) {
+  .pickup-container {
+    padding: 10px;
+  }
+
+  .pickup-container h2 {
+    font-size: 20px;
+  }
+
+  .pickup-details {
+    font-size: 13px;
+  }
+}
+

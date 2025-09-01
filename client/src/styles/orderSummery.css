@@ -38,3 +38,56 @@
 margin-top: 12px; display:flex; gap:8px; justify-content: flex-end; }
 .btn { border: 0; border-radius: 10px; padding: 10px 14px; cursor: pointer; background: #e5e7eb; font-weight: 700; }
 .btn.primary { font-family: 'Urbanist', sans-serif; background: #ed3a3a; color: #fff; }
+
+/* ===== רספונסיביות לעמוד Order Summary ===== */
+
+/* טאבלט (עד 1024px) */
+@media (max-width: 1024px) {
+  .order-summary {
+    padding: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .order-summary h2 {
+    font-size: 26px;
+    text-align: center;
+  }
+}
+
+/* מובייל (עד 768px) */
+@media (max-width: 768px) {
+  .order-summary {
+    padding: 15px;
+  }
+
+  .order-summary h2 {
+    font-size: 22px;
+  }
+
+  .order-summary p,
+  .order-summary li {
+    font-size: 14px;
+  }
+
+  .order-summary button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* מובייל קטן (עד 480px) */
+@media (max-width: 480px) {
+  .order-summary {
+    padding: 10px;
+  }
+
+  .order-summary h2 {
+    font-size: 20px;
+  }
+
+  .order-summary p,
+  .order-summary li {
+    font-size: 13px;
+  }
+}

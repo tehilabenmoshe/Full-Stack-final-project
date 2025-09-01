@@ -262,11 +262,102 @@
     minmax(100px, 0.8fr);
 }
 .card-form > * { min-width: 0; width: 100%; box-sizing: border-box; }
-@media (max-width: 880px) {
-  .card-form { grid-template-columns: 1fr 1fr; }
-  .card-form .cc-number { grid-column: 1 / -1; }
-}
-@media (max-width: 520px) {
-  .card-form { grid-template-columns: 1fr; }
+
+/* ===== רספונסיביות לעמוד Checkout ===== */
+
+/* טאבלט (עד 1024px) */
+@media (max-width: 1024px) {
+  .checkout-container {
+    padding: 20px;
+  }
+
+  .checkout-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .checkout-grid {
+    grid-template-columns: 1fr; /* במקום שתי עמודות */
+    gap: 20px;
+  }
 }
 
+/* מובייל (עד 768px) */
+@media (max-width: 768px) {
+  .checkout-container {
+    padding: 15px;
+  }
+
+  .checkout-form input,
+  .checkout-form select,
+  .checkout-form button {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .checkout-summary {
+    padding: 15px;
+  }
+
+  .checkout-title {
+    font-size: 24px;
+  }
+
+  .checkout-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* מובייל קטן (עד 480px) */
+@media (max-width: 480px) {
+  .checkout-title {
+    font-size: 20px;
+  }
+
+  .checkout-form input,
+  .checkout-form select {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .checkout-summary {
+    font-size: 14px;
+  }
+}
+/* ===== שיפור פריסת שדות תשלום ===== */
+
+/* ברירת מחדל – פריסה מאוזנת */
+.card-form {
+  display: grid;
+  gap: 10px;
+  grid-template-columns:
+    minmax(220px, 2fr)   /* card number */
+    minmax(100px, 1fr)   /* MM/YY */
+    minmax(100px, 1fr);  /* CVC */
+}
+
+.card-form > * {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* מסכים בינוניים – card number למעלה, ואז MM/YY + CVC ליד */
+@media (max-width: 880px) {
+  .card-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  .card-form .cc-number {
+    grid-column: 1 / -1; /* מספר כרטיס יתפרס על כל השורה */
+  }
+}
+
+/* מסכים קטנים – הכול יורד לטור אחד */
+@media (max-width: 520px) {
+  .card-form {
+    grid-template-columns: 1fr;
+  }
+}
