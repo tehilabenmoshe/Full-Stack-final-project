@@ -1,4 +1,3 @@
-// server/src/models/cartModel.js
 const pool = require('../db_connection');
 
 async function ensurePendingOrder(conn, userId) {
@@ -162,7 +161,7 @@ const cartModel = {
     }
   },
 
-  
+
   /** מחיקת שורת סל */
   async removeItem(userId, itemId) {
     const conn = await pool.getConnection();

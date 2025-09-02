@@ -4,7 +4,7 @@ import "../styles/DishModal.css";
 export default function DishModal({ dish, onClose, onAdd, fetchAddons }) {
   const [qty, setQty] = useState(1);
   const [note, setNote] = useState("");
-  const [addons, setAddons] = useState([]);        // [{id,name,price}]
+  const [addons, setAddons] = useState([]);       
   const [selected, setSelected] = useState(new Set());
 
   useEffect(() => {

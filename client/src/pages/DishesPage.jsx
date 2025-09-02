@@ -66,8 +66,8 @@ export default function DishesPage() {
           name: newDishName,
           price: newDishPrice,
           category_id: id,
-          description: newDishDesc || null,     // ✅ נשלח לשרת
-          image_url: newDishImage || null       // ✅ נשלח לשרת
+          description: newDishDesc || null,     
+          image_url: newDishImage || null       
         },
         { headers: { ...authHeaders(), "Content-Type": "application/json" } }
       );

@@ -1,4 +1,3 @@
-// src/pages/OrderSummaryPage.jsx
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../components/CartProvider";
 import { useAuth } from "../AuthProvider";
@@ -60,7 +59,7 @@ export default function OrderSummary() {
                 state: {
                   fullName,
                   phone,
-                  address: addressText, // יופיע כשדה ברירת מחדל ב-PickupPage
+                  address: addressText, 
                 },
               })
             }

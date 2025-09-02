@@ -1,4 +1,3 @@
-// models/userModel.js
 const pool = require('../db_connection');
 
 const UserModel = {

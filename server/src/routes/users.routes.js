@@ -1,5 +1,3 @@
-// server/src/routes/users.routes.js
-
 const express = require('express');
 const router = express.Router();
 const isAdmin = require('../middleware/isAdmin');

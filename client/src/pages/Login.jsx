@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Register.css';
 import burger from "../assets/burger.png";
 import logo from "../assets/logo.png";
-import { useAuth } from '../AuthProvider'; // ודאי שהנתיב נכון
+import { useAuth } from '../AuthProvider'; 
 
 export default function Login() {
   const [username, setUsername] = useState('');

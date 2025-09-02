@@ -86,7 +86,7 @@ useEffect(() => {
           <CartButton />
         </div>
 
-        {/* ✅ כאן מוצגות המנות */}
+        {/*  מנות */}
         <div className="dishes-list">
           {dishes.length > 0 ? (
             dishes.map(d => (
@@ -97,7 +97,6 @@ useEffect(() => {
                   <p className="dish-description">{d.description}</p>
                 </div>
 
-                {/* ✅ footer חדש למחיר + כפתור */}
                 <div className="dish-footer">
                   <p className="dish-price">{d.price} ₪</p>
                   <button

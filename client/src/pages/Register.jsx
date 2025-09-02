@@ -1,7 +1,6 @@
-
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../AuthProvider'   // ✅ נוסיף שימוש ב־AuthProvider
+import { useAuth } from '../AuthProvider'  
 import '../styles/Register.css'
 import logo from '../assets/logo.png'
 import burger from '../assets/burger.png'
@@ -17,7 +16,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const nav = useNavigate()
-  const { login } = useAuth()  // ✅ נקבל את login מה־Context
+  const { login } = useAuth() 
 
   function onChange(e) {
     const { name, value } = e.target
@@ -53,10 +52,9 @@ export default function Register() {
         throw new Error(msg)
       }
 
-      // ✅ נכניס את המשתמש ל־Context + localStorage
+      //  נכניס את המשתמש ל־Context + localStorage
       login(data)
 
-      // ✅ ננווט לדף הלקוח
       nav('/customer', { replace: true })
 
     } catch (err) {

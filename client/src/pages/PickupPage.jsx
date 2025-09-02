@@ -1,4 +1,3 @@
-// src/pages/PickupPage.jsx
 import { useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import RouteMap from "../components/RouteMap";
@@ -25,7 +24,6 @@ export default function PickupPage() {
   const fullName = state?.fullName || "";
   const phone    = state?.phone || "";
 
-  // שדה החיפוש יתחיל מהעיר/כתובת שהועברה (אם הועברה)
   const [userQuery, setUserQuery] = useState(state?.city || state?.address || "");
   const [userLoc, setUserLoc] = useState(null);
   const [bestPickup, setBestPickup] = useState(null);
@@ -50,7 +48,7 @@ export default function PickupPage() {
     }
   };
 
-  // טקסט זמן משוער
+
   const etaText = useMemo(() => {
     if (etaSec == null) return "";
     const mins = Math.round(etaSec / 60);
@@ -98,10 +96,7 @@ export default function PickupPage() {
           </div>
 
         </>
-      )}
-
-      
-     
+      )}     
     </div>
   );
 }

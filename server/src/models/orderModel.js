@@ -1,4 +1,3 @@
-// server/src/models/orderModel.js
 const pool = require('../db_connection');
 
 // ─────────────  Getters  ─────────────

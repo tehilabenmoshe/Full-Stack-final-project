@@ -1,4 +1,3 @@
-// server/src/routes/checkout.routes.js
 const router = require('express').Router();
 const auth = require('../middleware/auth');                // ממלא req.user.id
 const {

@@ -1,4 +1,3 @@
-// src/components/RouteMap.jsx
 import { useEffect, useRef } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import L from "leaflet";
