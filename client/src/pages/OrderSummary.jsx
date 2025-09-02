@@ -2,36 +2,37 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../components/CartProvider";
 import { useAuth } from "../AuthProvider";
-import "../styles/orderSummery.css"; // יש כאן כבר את הסגנונות; אפשר להוסיף למטה הרחבות
+import "../styles/orderSummery.css";
 
-export default function OrderSummaryPage() {
+export default function OrderSummary() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { items, total } = useCart();
+  const { items: cartCtxItems, total: cartCtxTotal } = useCart();
   const { user } = useAuth();
 
-  // נתונים שמגיעים מהניווט (עם נפילות חכמות לערכי ברירת מחדל)
-  const fullName    = state?.fullName ?? user?.name ?? "";
-  const phone       = state?.phone ?? user?.phone ?? "";
-  const addressText = state?.addressText ?? state?.city ?? "";
-  const pickupName  = state?.pickup?.name ?? state?.pickupName ?? "—";
-  const paymentLabel= state?.paymentLabel ?? "Self-pickup - payment on site";
+  const fullName     = state?.fullName ?? user?.name ?? "";
+  const phone        = state?.phone ?? user?.phone ?? "";
+  const addressText  = state?.addressText ?? state?.city ?? "";
+  const paymentLabel = state?.paymentLabel ?? "Self-pickup - payment on site";
+
+  // נעדיף snapshot שהגיע מה־Checkout; אם אין – ניפול ל־context
+  const items = state?.cartItems ?? cartCtxItems ?? [];
+  const total = state?.cartTotal ?? cartCtxTotal ?? 0;
 
   return (
     <div className="summary-page-wrap">
       <div className="summary-card">
-        <h2 className="summary-title">Order Summery </h2>
+        <h2 className="summary-title">Order Summary</h2>
 
         <div className="summary-rows">
-          <div className="row"><span>name</span><span>{fullName || "—"}</span></div>
-          <div className="row"><span>mobile</span><span>{phone || "—"}</span></div>
-          <div className="row"><span>address</span><span>{addressText || "—"}</span></div>
-          <div className="row"><span>pickup point </span><span>{pickupName}</span></div>
-          <div className="row"><span>payment method </span><span>{paymentLabel}</span></div>
+          <div className="row"><span>Name</span><span>{fullName || "—"}</span></div>
+          <div className="row"><span>Mobile</span><span>{phone || "—"}</span></div>
+          <div className="row"><span>Address</span><span>{addressText || "—"}</span></div>
+          <div className="row"><span>Payment method</span><span>{paymentLabel}</span></div>
         </div>
 
         <div className="summary-items">
-          <h4> order items</h4>
+          <h4>Order items</h4>
           {items?.length ? (
             <ul>
               {items.map((it) => {
@@ -45,19 +46,30 @@ export default function OrderSummaryPage() {
               })}
             </ul>
           ) : (
-            <p>no items in cart  </p>
+            <p>No items to show.</p>
           )}
-          <div className="total">total: ₪{Number(total || 0).toFixed(2)}</div>
+          <div className="total">Total: ₪{Number(total || 0).toFixed(2)}</div>
         </div>
 
-        <p className="summary-thanks">
-          Thank you very much! We will update when the order is ready for pickup!😊
-        </p>
-
         <div className="summary-actions">
-          <button className="btn" onClick={() => navigate(-1)}>חזרה</button>
+          {/* כפתור לעמוד המפה/מסלול */}
+          <button
+            className="btn"
+            onClick={() =>
+              navigate("/customer/pickup", {
+                state: {
+                  fullName,
+                  phone,
+                  address: addressText, // יופיע כשדה ברירת מחדל ב-PickupPage
+                },
+              })
+            }
+          >
+            Choose Pickup point & Route
+          </button>
+
           <button className="btn primary" onClick={() => navigate("/customer")}>
-            Back To Shopping!
+            Back To Shopping
           </button>
         </div>
       </div>

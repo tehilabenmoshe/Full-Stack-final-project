@@ -97,25 +97,6 @@ export default function PickupPage() {
             />
           </div>
 
-          <div className="pickup-actions">
-            <button
-                className="pickup-summary-btn"
-                onClick={() => navigate("/customer/order-summary", {
-                state: {
-                    fullName,                 // אם יש אצלך ב-PickupPage (או תביאי מ-state שהגיע מה-Checkout)
-                    phone,
-                    addressText: userQuery,   // העיר/כתובת שהוזנה
-                    pickup: bestPickup,       // { id, name, lat, lng }
-                    pickupName: bestPickup?.name,
-                    paymentLabel: "Self-pickup - payment on site",
-                }
-                })}
-                disabled={!items?.length}
-                >
-                Order Summery
-            </button>
-          </div>
-
         </>
       )}
 

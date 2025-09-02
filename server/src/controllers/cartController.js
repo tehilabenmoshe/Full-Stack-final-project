@@ -63,3 +63,17 @@ exports.removeItem = async (req, res) => {
     res.status(status).json({ error: err.message || 'Failed to remove item' });
   }
 };
+
+exports.clearCart = async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+
+    const result = await Cart.clearCart(userId); // { cleared, orderId, removed }
+    return res.json({ ok: true, ...result });
+  } catch (err) {
+    console.error('clearCart error:', err);
+    const status = err.status || 500;
+    return res.status(status).json({ error: err.message || 'Failed to clear cart' });
+  }
+};

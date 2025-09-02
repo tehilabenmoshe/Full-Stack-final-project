@@ -73,20 +73,20 @@
 
 .add-dish {
   display: flex;
-  flex-direction: column;   /* שדות אחד מתחת לשני */
+  flex-direction: column;   
   gap: 10px;
   margin: 20px 0 40px;
   padding: 15px;
   background: #fdf6f0;
   border: 2px dashed #ffb347;
   border-radius: 16px;
-  align-items: stretch;     /* כל הילדים ימלאו את כל הרוחב */
+  align-items: stretch;     
 }
 
 .add-dish input,
 .add-dish button {
-  width: 100%;              /* כולם באותו רוחב */
-  box-sizing: border-box;   /* padding לא יחרוג מה־100% */
+  width: 100%;              
+  box-sizing: border-box;   
 }
 
 .add-dish input {

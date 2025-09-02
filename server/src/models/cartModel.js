@@ -162,6 +162,7 @@ const cartModel = {
     }
   },
 
+  
   /** מחיקת שורת סל */
   async removeItem(userId, itemId) {
     const conn = await pool.getConnection();
@@ -187,6 +188,45 @@ const cartModel = {
 
       await conn.commit();
       return { ok: true };
+    } catch (err) {
+      try { await conn.rollback(); } catch {}
+      throw err;
+    } finally {
+      conn.release();
+    }
+  },
+
+
+  /** ריקון כל הסל של המשתמש (ההזמנה ה־pending) */
+  async clearCart(userId) {
+    const conn = await pool.getConnection();
+    try {
+      await conn.beginTransaction();
+
+      const [[ord]] = await conn.query(
+        `SELECT id FROM orders
+          WHERE user_id=? AND status='pending'
+          ORDER BY id DESC LIMIT 1`,
+        [userId]
+      );
+
+      if (!ord) {
+        await conn.commit();
+        return { cleared: false, orderId: null, removed: 0 };
+      }
+
+      const [del] = await conn.query(
+        `DELETE FROM order_items WHERE order_id=?`,
+        [ord.id]
+      );
+
+      await conn.query(
+        `UPDATE orders SET total_price=0 WHERE id=?`,
+        [ord.id]
+      );
+
+      await conn.commit();
+      return { cleared: true, orderId: ord.id, removed: del.affectedRows };
     } catch (err) {
       try { await conn.rollback(); } catch {}
       throw err;

@@ -27,14 +27,14 @@ body {
 .logo {
   display: flex;
   align-items: center;
-  gap: 0px; /* רווח קטן בין הטקסט לתמונה */
+  gap: 0px;
   margin-bottom: 10px;
 }
 
 .logo img {
-  width: 120px;   /* גודל רוחב */
-  height: 60px;   /* גובה */
-  object-fit: contain; /* שהתמונה לא תתעוות */
+  width: 120px; 
+  height: 60px;   
+  object-fit: contain; 
 }
 
 .snav {
@@ -98,7 +98,6 @@ body {
   .side { position:sticky; top:0; display:flex; gap:12px; overflow:auto }
 }
 
-/* פריסת הטופבר */
 .top {
   display: flex;
   align-items: center;
@@ -110,7 +109,6 @@ body {
   border: none;
 }
 
-/* מעטפת לשדה החיפוש */
 .searchbar {
   position: relative;
   align-items: center;
@@ -119,7 +117,6 @@ body {
   border: none;
 }
 
-/* האייקון */
 .search-icon {
   position: absolute;
   left: 14px;
@@ -131,7 +128,6 @@ body {
   pointer-events: none;
 }
 
-/* קלט החיפוש */
 .search-input {
   width: 80%;
   height: 38px;
@@ -245,7 +241,7 @@ body {
   height: 340px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* ✅ מחלק בין למעלה ללמטה */
+  justify-content: space-between; 
   padding: 15px;
 }
 
@@ -281,11 +277,10 @@ body {
   flex-grow: 1;
 }
 
-/* מעטפת למחיר + כפתור */
 .dish-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* ✅ מחיר בצד אחד, כפתור בצד שני */
+  justify-content: space-between; 
   margin-top: auto;
   padding-top: 10px;
 }
@@ -296,7 +291,6 @@ body {
   color: #ff2759;
 }
 
-/* כפתור עגול עגלה */
 .add-to-cart-btn {
   background-color: #ff2759;
   color: #fff;
@@ -326,11 +320,11 @@ body {
 /* טאבלט ונייד (עד 768px) */
 @media (max-width: 768px) {
   body {
-    background: #fff !important; /* לבטל רקע אפור */
+    background: #fff !important; 
   }
 
   .layout {
-    grid-template-columns: 1fr; /* sidebar למעלה, תוכן מתחת */
+    grid-template-columns: 1fr; 
   }
 
   .side {

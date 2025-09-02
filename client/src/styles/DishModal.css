@@ -34,18 +34,38 @@
   font-weight:800; 
   color:#ff2f4e
 }
-.dm-desc{ color:#555; margin:0 0 10px; }
+.dm-desc{ 
+  color:#555; 
+  margin:0 0 10px; 
+}
 
-.dm-row{ display:flex; align-items:center; justify-content:space-between; margin:8px 0; }
+.dm-row{ 
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  margin:8px 0; 
+}
 .dm-label .textarea{ 
   font-weight:600; 
   
 }
-.dm-qty{ display:flex; align-items:center; gap:12px; }
-.dm-qty button{
-  width:32px; height:32px; border-radius:8px; border:1px solid #e5e7eb; background:#fafafa; cursor:pointer;
+.dm-qty{ 
+  display:flex; 
+  align-items:center; 
+  gap:12px; 
 }
-.dm-section{ margin:10px 0; }
+
+.dm-qty button{
+  width:32px; 
+  height:32px; 
+  border-radius:8px; 
+  border:1px solid #e5e7eb;
+  background:#fafafa; 
+  cursor:pointer;
+}
+.dm-section{ 
+  margin:10px 0; 
+}
 .dm-addons{ 
   list-style:none; 
   margin:6px 0 0; 
@@ -54,8 +74,20 @@
   gap:6px; 
   text-align: left;
 }
-.dm-addons label{ display:flex; justify-content:space-between; gap:12px; align-items:center; padding:8px 10px; border:1px solid #eee; border-radius:8px; }
-.dm-price{ color:#111; font-weight:600; }
+.dm-addons label{ 
+  display:flex; 
+  justify-content:space-between; 
+  gap:12px; 
+  align-items:center; 
+  padding:8px 10px; 
+  border:1px solid #eee; 
+  border-radius:8px; 
+}
+
+.dm-price{ 
+  color:#111; 
+  font-weight:600; 
+}
 
 .dm-note{
   margin-top:8px;
